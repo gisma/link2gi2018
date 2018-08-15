@@ -22,13 +22,13 @@ So why then even a package like @color[blue](**link2GI**)?
 
 ---
 
-## Because of an increasing demand
+## Increasing demand
 
 R is a widely used entry-level scripting language with low access threshold with an increasing number of users. 
 
 Same with spatiotemporal data analysis 
 
-**However** from a straightforward R-User point of view, for companys or university working places without sufficient privileges, for users that ar not familiar with GIS-software or for fast prototyping across software and systems and so forth... **it could be useful**
+**However** from a R-User point of view  without either sufficient privileges or not familiar with GIS-software also for fast prototyping... **it could be useful**
 
 ---
 
