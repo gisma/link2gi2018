@@ -34,13 +34,17 @@ Same with spatiotemporal data analysis
 
 ##  Unfortunately there are some crucial everyday restrictions
 
+---
+## The R-user phenomen 
 @ul
   
-  - The R-user phenomen 
+
     - If necessary a cumbersome, manual use of GIS GUIs for pre-, post-processing of data or data analysis, format conversion, etc. is common 
     - The R-ish point of view of users is focusing on R solution and usually not highly involved in integrating API calls, system depending scripts etc. 
-    
-  - The operating system phenomenon
+
+---
+
+## The operating system phenomenon
     - Different user privileges
     - Limited knowledge of system and command line
     - Strange CLI behaviour dependiong on OS-type, -version and leads to cumbersome (cross platform) collaboration due to code incompatibilities etc. 
