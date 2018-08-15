@@ -27,7 +27,9 @@ So why then even a package like @color[blue](**LINK2gi**)?
 That means no need for action for probably most of the people hanging around here. 
 **But** for companys, university working places wiout full privileges, R-specialsts but no computer and/or GIS specialists, fast prototyping across software and systems and so forth...
 ---
+  That means no need for action for probably most of the people hanging around here. 
   
+**But** for companys, university working places wiout full privileges, R-specialsts but no computer and/or GIS specialists, fast prototyping across software and systems and so forth...
 ---
 +++
   
