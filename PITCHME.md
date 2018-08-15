@@ -14,7 +14,7 @@ To clarify If have to do so on 20 ore so individual Windows Laptops you will get
 
 ---
   
-## Why link2GI
+## Why link2GI...?
 
 Taking into account the great capabilities of GRASS like shown by Markus and Veronika or the great accessibility of QGIS as demonstrated by Jannis there seems to be no need for a common meta interface. 
 
@@ -24,17 +24,13 @@ So why then even a package like @color[blue](**link2GI**)?
 
 ## Increasing demand
 
-R is a widely used entry-level scripting language with low access threshold with an increasing number of users. 
+  - R is a widely used entry-level scripting language with low access threshold with an increasing number of users. 
 
-Same with spatiotemporal data analysis 
+  - Same with spatiotemporal data analysis 
+  - Crucial everyday restrictions 
 
-**However** from a R-User point of view  without either sufficient privileges or not familiar with GIS-software also for fast prototyping... **it could be useful**
++++
 
----
-
-##  Unfortunately there are some crucial everyday restrictions
-
----
 ## The R-user phenomen 
 @ul
   
@@ -42,7 +38,7 @@ Same with spatiotemporal data analysis
     - If necessary a cumbersome, manual use of GIS GUIs for pre-, post-processing of data or data analysis, format conversion, etc. is common 
     - The R-ish point of view of users is focusing on R solution and usually not highly involved in integrating API calls, system depending scripts etc. 
 
----
++++
 
 ## The operating system phenomenon
     - Different user privileges
@@ -52,7 +48,10 @@ Same with spatiotemporal data analysis
 
 @ulend
 
----
+--- 
+## ... bcause finally 
+
+from a R-User point of view without either sufficient privileges or not familiar with GIS-software also for fast prototyping it seems to be **helpful** to reduce as many of these problems as possible.
 
   
 
