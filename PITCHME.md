@@ -4,12 +4,21 @@
 **Prague, August 2018** - [Web site](https://geostat-course.org/2018)
 
 ---
-  
-  Using the GIS from R is pretty simple if you are fully aware of your operation system and if you have full system control. 
+The @color[blue](**LINK2gi**) is a very straightforward small framework to simplify the usage of major commandline GIS APIs. 
+
+Integrating GIS from R is incredible powerful and pretty simple if you are fully aware of your operation system and if you have full system control. 
+That means no need for action for most of the people around here 
+
+So why then even a package like @color[blue](**LINK2gi**)?
 
 ---
   
-# SLIDE2
+## some real world aspects
+@ul
+
+  - 
+
+@ulend
 ---
   
   @ul
@@ -42,3 +51,4 @@
   
   
 
+<!--- ?include=tgrass/link2gigeostat.md --->
