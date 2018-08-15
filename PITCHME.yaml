@@ -5,6 +5,7 @@
 # https://github.com/gitpitch/gitpitch/wiki/Slideshow-Settings
 # Layout
 layout : center-right
+
 # theme : beige
 theme-override : assets/css/osgeo.css
 highlight : hybrid
