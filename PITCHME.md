@@ -49,19 +49,36 @@ So why then even a package like @color[blue](**link2GI**)?
 @ulend
 
 --- 
-## ... bcause finally 
+## ... last but not least
 
 from a R-User point of view without either sufficient privileges or not familiar with GIS-software also for fast prototyping it seems to be **helpful** to reduce as many of these problems as possible.
 
   
 
-
 ---
+## What are the key features so far?
 
-
----
+  - detecting existing intallations of GRASS7, SAGA, and Orfeo Toolbox
+  - setting up correct user envionments as required by the GIS software
+    - providing variables for easy direct system calls
+    - providing seamless integration in the well known wrappper packages RSAGA, rgrass7 
+  - providing a alpha version of a simple OTB wrapper 
+  - providing some small tools like project structure setup etc
 
 +++
+
+## R-dependencies
+'raster', 'rgdal', 'gdalUtils', 'rgrass7', 'sp', 'sf'
+
++++
+##  Supported GIS software 
+
+  - GRASS 7.x
+  - SAGA 2.x - current release
+  - OTB all releases
+  - GDAL binaries all releases
+
+---
   
   
 
