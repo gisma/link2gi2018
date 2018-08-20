@@ -41,7 +41,7 @@ So why then even a package like @color[blue](**link2GI**)?
 +++
 
 ## The operating system phenomenon
-    - Different user privileges
+    - Different and often user privileges
     - Limited knowledge of system and command line
     - Strange CLI behaviour dependiong on OS-type, -version and leads to cumbersome (cross platform) collaboration due to code incompatibilities etc. 
     - extreme varying command line interpreter capabilities (Windows, Linux)
@@ -87,13 +87,8 @@ from a R-User point of view without either sufficient privileges or not familiar
 
 +++
   
-  - next1
-  
-  - next1.5
 
-- next2
-  
----
+---?code=R/usecases/cost-analysis/useCase_beetle.R&lang=R&title=Control script
   
   ## main functions in link2GI
   

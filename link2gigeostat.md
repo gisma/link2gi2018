@@ -18,38 +18,60 @@ vignette: >
 
 # What is link2GI?
 
-The [link2GI](https://CRAN.R-project.org/package=link2GI) package tries to provide an easy entrance door for linking GRASS, SAGA GIS and QGIS as well as other awesome command line tools like the Orfeo Toolbox (OTB) for R users that are not operating system specialists or highly experienced GIS users. It is a result of numerous graduate courses with R-GIS beginners in the hostile world of university computer pools running under restricted Windows systems. It is is sometimes really cumbersome to get all necessary settings in a line. If have to do so on 20 ore so individual Windows Laptops you will get an idea why it could be comfortable to automate this procedure.
+The [link2GI](https://CRAN.R-project.org/package=link2GI) package provides a small linking tool to simplify the usage of GRASS and SAGA GIS and Orfeo Toolbox (OTB) for R users. the focus is to simplify the the accessibility of this software for non operating system specialists or highly experienced GIS geeks.  Acutally it is a direct result of numerous graduate courses with R(-GIS) beginners in the hostile world of university computer pools running under extremely restricted Windows systems. 
 
 This vignette:
 
 * shows how to use `link2GI` according to specific system requirements 
-* gives hands on examples of how to use it for exemplary use of the linked software 
-* give some examples of how they can be used for meaningful and more efficient spatial analysis
+* gives some hands on examples of how to use  
+* give some applied examples for more efficient spatial analysis 
 
 
-# Why link2GI?
+# Why link2GI now?
 
 R has quite a lot of classes for storing and dealing with spatial data. For vector data the [sp](https://CRAN.R-project.org/package=sp) and recently the great [sf](https://CRAN.R-project.org/package=sf) packages are well known and the raster data world is widely covered by the [raster](https://CRAN.R-project.org/package=raster) package. Additionally external spatial data formats are interfaced by wrapping packages as [rgdal](https://CRAN.R-project.org/package=rgdal) or [gdalUtils](https://CRAN.R-project.org/package=gdalUtils). For more specific links as needed for manipulating atmospheric modeling packages as [ncdf4](https://CRAN.R-project.org/package=ncdf4) are very helpful.
 
-The spatial analysis itself is often supported by wrapper packages that integrate external libraries, command line tools or a mixture of both in an R-like syntax [rgeos](https://CRAN.R-project.org/package=rgeos), [geosphere](https://CRAN.R-project.org/package=geosphere), [Distance](https://CRAN.R-project.org/package=Distance), [maptools](https://CRAN.R-project.org/package=maptools), [igraph](https://CRAN.R-project.org/package=igraph) or [spatstat](https://CRAN.R-project.org/package=spatstat). However it  would be a never ending story to complete this list. 
+The spatial analysis itself is often supported by wrapper packages that integrate external libraries, command line tools or a mixture of both in an R-like syntax [rgeos](https://CRAN.R-project.org/package=rgeos), [geosphere](https://CRAN.R-project.org/package=geosphere), [Distance](https://CRAN.R-project.org/package=Distance), [maptools](https://CRAN.R-project.org/package=maptools), [igraph](https://CRAN.R-project.org/package=igraph) or [spatstat](https://CRAN.R-project.org/package=spatstat). 
 
-Despite all this capabilities of spatial analysis and data handling in the world of R, it can be stated (at least from a non-R point of view), that there is a enormous gap between R and the mature open source Geographic Information System (GIS) and Remote Sensing (RS) software community. QGIS, GRASS GIS and SAGA GIS are providing a comprehensive, growing and mature  collection of highly sophisticated algorithms. In most cases their algorithms are fast, stable and most of them are well proofed. Probably most of the R users that are somehow related to the GI community know that there are some awesome good wrapper packages for bridging this gap. For [GRASS GIS](https://grass.osgeo.org/) it is [rgrass7](https://CRAN.R-project.org/package=rgrass7) and for [SAGA GIS](http://www.saga-gis.org/)  the [RSAGA](https://CRAN.R-project.org/package=RSAGA) package. The development of the [RQGIS](https://CRAN.R-project.org/package=RQGIS) wrapper is the most recent outcome to get a simple access from the R side to the great [QGIS](https://www.qgis.org/) command line interface.
+It would be a never ending story to complete this list. 
 
-Unfortunately usually one will run into a lot of technical problems due to the choosen operating system  or library dependencies. In case of e.g. `RSAGA` the main problem seems to be the fact that the SAGA GIS developers are not only changing the syntax and strategy of the command line interface (CLI) but also within a release the calls differ from OS to OS. So the maintenance of RSAGA is obviously laborious (but thumbs up is still done). Currently `RSAGA` supports the `SAGA GIS`versions 2.0.4 - 2.2.3. Another example is  given by `GRASS GIS`  which is well known for a sophisticated setup of the environment and the spatial properties of the database. It is not really simple to get an easy working temporary or permanent setup from “outside” due to spatial and projection issues but even more caused by challenging system and environment settings which is  even more complex because of version and Windows OS systems. 
+Despite all this capabilities of spatial analysis and data handling in the world of `R`, it can be stated (at least from a non-R point of view), that there is still a enormous gap between R and the mature open source Geographic Information System (GIS) and even more Remote Sensing (RS) software community. `QGIS`, `GRASS GIS` and `SAGA GIS` are providing a comprehensive, growing and mature  collection of highly sophisticated algorithms. The provided algorithms are fast, stable and most of them are well proofed. Probably most of the `R` users who are somehow related to the GI community know that there are awesome good wrapper packages for bridging this gap. For [GRASS GIS 7](https://grass.osgeo.org/) it is [rgrass7](https://CRAN.R-project.org/package=rgrass7) and for [SAGA GIS](http://www.saga-gis.org/)  the [RSAGA](https://CRAN.R-project.org/package=RSAGA) package. The development of the [RQGIS](https://CRAN.R-project.org/package=RQGIS) wrapper is the most recent outcome to provide a simple  usage of the powerful [QGIS](https://www.qgis.org/) command line interface.
 
-To make it short it is a bit cumbersome to deal with all this stuff if one just want to start e.g. GRASS from the R command line for e.g. a powerful random walk function call.
+Unfortunately one will run into a lot of technical problems depending on the choosen operating system (OS) or library dependencies or GIS software versions. In case of e.g. `RSAGA` the main problem has been that the SAGA GIS developers are not only changing the syntax and strategy of the command line interface (CLI) but also within the same release the calls differ from OS to OS. So the maintenance of RSAGA is at least laborious (but thumbs up is running again).  Another example is  given by `GRASS GIS`  which is well known for a sophisticated setup of the environment and the spatial properties of the database. If you "just" want to use a specific GRASS algorithm from R, you will probablys get lost in setting up all OS-dependencies that are neccessary to set up a correct temporary or permanent GRASS-environment from “outside”. This is not only caused due to the strict spatial and projection requirements of GRASS but much more by challenging OS enviroments especially Windows. 
+
+To make it short it is a bit cumbersome to deal with all this stuff if one just want to start e.g. GRASS from the R command line for e.g. a powerful random walk cost analysis (`r.walk`) call as provided by GRASS.
 
 
 # What means linking?
-Linking means simply to provide all necessary environment settings as well as the full access to the the command line APIs of the mentioned software tools. It tries at  much as possible to bridge the gap between R and these tools. The strategy differs from software to software and OS to OS. 
+Linking means simply to provide all necessary environment settings that satisfy the existing wrapper packages as well as in addition the full access to the the command line (CLI) APIs of the mentioned software tools. `link2GI` tries to analyze which software is installed to set up an temporary enviroment meeting the above mentioned needs. 
 
-GRASS GIS has the most challenging requirements. It needs a bunch of environment and path variables as well as a correct setup of the geographical data parameters. The `linkGRASS7` function tries to find all installations let you choose one and generate the necessary variables. As a result you can use both the rgrass7 package  or the command line `API` of `GRASS`.
+### GRASS GIS
 
-`SAGA GIS` is a bit easier to set up. The strategy is similar. The `linkSAGA` function tries to find all `SAGA` installations, let you choose one and generate some global variables. You may use `RSAGA` if you run a `SAGA` version of 2.0.4 - 2.2.3. Nevertheless it is strongly recommended to use the  `R` system() call to  interface `R` with the `saga_cmd` API. 
+`GRASS GIS` has the most challenging requirements. It needs a bunch of environment and path variables as **and** a correct setup of the geographical data parameters. The `linkGRASS7` function tries to find all installations let you (optionally) choose the one you want to use and generate the necessary variables. As a result you can use both the rgrass7 package  or the command line `API` of `GRASS`.
 
-The `Orfeo Toolbox` (OTB) is a very powerful remote sensing toolbox. It is widely used for classification filtering and machine learning applications. You will find a lot of the implemented algorithm within different R packages but *always* much slower or restricted to small data chunks. The linkage is performed similar so that it is easy to use the command line API of the `OTB`. Currently there is no `OTB` wrapper available. 
+### SAGA GIS
 
-# Usage of the link2GI package
+`SAGA GIS` is a far easier to set up. Again the `linkSAGA` function tries to find all `SAGA` installations, let you (optionally) choose one and generate the necessary variables. You may also use `RSAGA` but you have to hand over the result of `linkSAGA` like `RSAGA::rsaga.env(path = saga$sagaPath)`. For a straightforward usage you may simply use the  `R` system() call to  interface `R` with the `saga_cmd` API. 
+
+### OTB
+
+The `Orfeo Toolbox` (OTB) is a very powerful remote sensing toolbox. It is widely used for classification, filtering and machine learning applications. You will find some of the implemented algorithm within different R packages but **always** much slower or only running on small data chunks. Due to a missing wrapper the linkage is performed to use the command line API of the `OTB`. Currently link2GI provides very basic list-based `OTB` wrapper. 
+
+### GDAL
+GDAL is perfectly integrated in R. However in some cases it is beneficial to uses system calls and grab the binaries directly. `link2GI` generates a list of all pathes and commands so you may easily use also python scripts calls and other chains. 
+
+# Usage of the link2GI package - Basic Examples 
+
+## Brute force search usage 
+Automatic search and find of the installed GIS software binaries is performed by the `find` functions.
+
+
+```r
+# get meuse data as sp object
+require(link2GI)
+link2GI:: find  SAGA()
+```
+
 
 We will start with `GRASS` .
 
@@ -63,7 +85,7 @@ The function `linkGRASS7` tries to find all valid  `GRASS GIS` binaries by analy
 
 If you have more than one valid installation and run `linkGRASS7` with the  arguments `select_ver = TRUE`, then you will be ask to select one.
 
-### Basic Examples 
+
 
 #### Standard Full Search Usage 
 Automatic search and find of `GRASS` binaries using the meuse sp data object for spatial referencing.
