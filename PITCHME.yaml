@@ -7,7 +7,7 @@
 layout : center-left
 
 # theme : beige
-theme-override : css/osgeo.css
+theme-override : css/beige.css
 highlight : hybrid
 transition : fade
 published : true
