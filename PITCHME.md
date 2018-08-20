@@ -85,10 +85,10 @@ from a R-User point of view without either sufficient privileges or not familiar
 
 
 
-+++
+---
   
 
----?code=R/usecases/cost-analysis/useCase_beetle.R&lang=bash&title=Control script
+---?code=R/usecases/cost-analysis/useCase_beetle.R&lang=R&title=Control script
 
 @[32-40]
 
