@@ -83,7 +83,7 @@ from a R-User point of view without either sufficient privileges or not familiar
   
 
 
----?code=usecaselink2GI.R&title=link2GI
+---?code=R/usecases/cost-analysis/useCaseBeetle.R&title=UseCase running Beetles aka cost analysis
 
 
 
