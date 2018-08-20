@@ -82,16 +82,26 @@ from a R-User point of view without either sufficient privileges or not familiar
   
   
 
-
+---?gist=https://github.com/gisma/link2gi2018/commit/fe4f1dada230a6a34fc36b29cf4b8fde0772dc84&lang=R
 
 
 ---
   
+```R
+require(raster)
+require(sp)
+require(gdalUtils)
+require(rgdal)
+tci<-FALSE
+projRootDir = "~/proj/beetle"
+link2GI::initProj(projRootDir = projRootDir, 
+                  projFolders =  c("run/","cost/"),
+                  global = TRUE,
+                  path_prefix ="path_" )
 
----?code=R/usecases/cost-analysis/useCase_beetle.R&lang=R&title=Control script
+beetleLocs<-read.csv2("~/proj/beetle/beetle.csv",header = TRUE,sep = ',',dec = '.',stringsAsFactors=FALSE)
 
-@[32-40]
-
+```
 ---
 
   ## main functions in link2GI
