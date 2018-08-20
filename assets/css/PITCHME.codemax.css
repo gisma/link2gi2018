@@ -5,6 +5,21 @@
  * https://github.com/gitpitch/gitpitch/wiki/Slideshow-Custom-CSS
  */
 
+body {
+  background: #fff;
+  background-color: #fff;
+}
+
+html:-webkit-full-screen-ancestor {
+  background: #fff;
+  background-color: #fff;
+}
+
+html:-moz-full-screen-ancestor {
+  background: #fff;
+  background-color: #fff;
+}
+
 .reveal pre {
   width: 100%;
   box-shadow : none;
@@ -13,14 +28,13 @@
 .reveal pre code {
   font-size: 1.2em;
   line-height: 1.2;
-  max-height: 50vh !important;
-  opacity: 0.95;
+  max-height: 60vh !important;
   border-radius: 10px;
 }
 
 .reveal .slides section .code-presenting-annotation {
   color: white;
-  background: #b5ad86;
+  background: #1f1c18;
   padding: 1px 15px;
   border-radius: 15px;
   opacity: 0.75 !important;
@@ -32,6 +46,7 @@
   padding: 4px 15px;
   opacity: 0.75 !important;
   border-radius: 15px;
+  display: none;
 }
 
 .reveal div.left {
@@ -50,18 +65,25 @@
     font-size: 0.5em;
 }
 
-#gp-logo img {
-  max-height: 2em;
-  max-width: none;
+.reveal a {
+    color: #e7ad52;
 }
 
-.reveal section img {
-  border: 0;
-  box-shadow: none;
+.reveal a:hover {
+    color: #f3d7ac;
+}
+
+.hljs {
+  background : none;
 }
 
 .white {
   color: white;
+}
+
+#gp-logo img {
+  max-height: 2em;
+  max-width: none;
 }
 
 .gp-tip { font-size : 1.5em; }
@@ -69,3 +91,4 @@
 .gp-contact { font-size : 1.4em; }
 
 .gp-download { margin-left: 10px; }
+

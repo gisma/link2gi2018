@@ -7,9 +7,13 @@
 layout : center-left
 
 # theme : beige
-theme-override : css/beige.css
-highlight : hybrid
+theme : simple
+theme-override : assets/css/PITCHME.css
+# theme-override : assets/css/PITCHME.codemax.css
+highlight : atom-one-light
+logo : assets/image/logo.png
+#highlight : hybrid
 transition : fade
 published : true
-footnote : "link2GI  - GEOSTAT 2018"
+footnote : "Chris Reudenbach 24th August 2018 link2GI  - GEOSTAT 2018"
 slide-number : true 
