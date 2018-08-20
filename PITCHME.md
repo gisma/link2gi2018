@@ -82,7 +82,8 @@ from a R-User point of view without either sufficient privileges or not familiar
   
   
 
----?gist=https://github.com/gisma/link2gi2018/commit/fe4f1dada230a6a34fc36b29cf4b8fde0772dc84&lang=R
+
+---?code=usecaselink2GI.R&title=link2GI
 
 
 ---
@@ -111,4 +112,3 @@ beetleLocs<-read.csv2("~/proj/beetle/beetle.csv",header = TRUE,sep = ',',dec = '
   
   
 
-<!--- ?include=tgrass/link2gigeostat.md --->
