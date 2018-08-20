@@ -17,3 +17,4 @@ transition : fade
 published : true
 footnote : "Chris Reudenbach 24th August 2018 link2GI  - GEOSTAT 2018"
 slide-number : true 
+code-line-numbers : true

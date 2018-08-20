@@ -86,6 +86,14 @@ from a R-User point of view without either sufficient privileges or not familiar
 ---?code=usecaselink2GI.R&title=link2GI
 
 
+
+@[1-6](load libraries and setup arguments)
+@[7-10](Setup project structure)
+@[12](Load beetle position)
+@[18](Load DEM file)
+@[22-24](setup and link GRASS)
+
+
 ---
   
 ```R
