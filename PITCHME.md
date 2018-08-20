@@ -88,11 +88,11 @@ from a R-User point of view without either sufficient privileges or not familiar
 
 
 @[1-6](load libraries and setup arguments)
-@[7-10](Setup project structure)
-@[12](Load beetle position)
-@[18](Load DEM file)
-@[22-24](setup and link GRASS)
-
+@[7-11](Setup project structure)
+@[13](Load beetle position)
+@[19](Load DEM file)
+@[23-25](Setup and link GRASS using the data set)
+@[27-31](Cost analysis wrapper function)
 
 ---
   
