@@ -134,11 +134,12 @@ C:\
 /usr
 ```
 --- 
-### Linking the software
+### Let's use meuse
 
 ```R
 # get meuse data as sp object
 require(link2GI)
+require(sp)
 require(sf)
 # get meuse data as sf object
 data(meuse) 
@@ -150,9 +151,18 @@ meuse_sf = st_as_sf(meuse,
 
 # create a temporary GRASS linkage using the meuse data
 
-linkGRASS7(meuse_sf)
-```
+linkGRASS7(meuse_sf,select_ver=1)
+```,
 ---
+## Ok what next?
+
+- usecase basic SAGA OTB
+- usecase processing UAV -derived pointclouds
+- usecase cost analysis
+
+---?code=R/usecases/saga_otb/useCaseSAGA_OTB.R&title=UseCase SAGA GIS and OTB CLI vs wrapper
+
+---?code=R/usecases/canopy-height/useCaseCHM.R&title=UseCase derive canopy height model from UAV generated point cloud
 
 ---?code=R/usecases/cost-analysis/useCaseBeetle.R&title=UseCase running Beetles aka cost analysis
 
@@ -184,7 +194,7 @@ beetleLocs<-read.csv2("~/proj/beetle/beetle.csv",header = TRUE,sep = ',',dec = '
 ```
 ---
 
-  
+  Thank you for attention
   
 ---
   
