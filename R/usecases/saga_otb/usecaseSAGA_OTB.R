@@ -1,6 +1,8 @@
+#'The uscase shows the straightforward calls of SAGA and OTB command line tools
+#'additionally the alternative usage of the coresponding RSAGA call is 
+#' required packages used
 
 # required packages
-require(uavRst)
 require(RSAGA)
 require(curl)
 require(link2GI)
