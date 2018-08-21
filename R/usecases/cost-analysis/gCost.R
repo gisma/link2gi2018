@@ -105,8 +105,8 @@ gcost<- function(path_run,currentP,allP){
                      
   )
   #return distances of point[i]
-  colnames(d)<-c("sLon","sLat","dLon","dLat","costDist","eucDist","walkDist")
-  return(d)
+  colnames(df)<-c("sLon","sLat","dLon","dLat","costDist","eucDist","walkDist")
+  return(df)
 }
 
 #######################################################################
@@ -192,3 +192,10 @@ getCosts <- function (inCost,vecFn,eucDist,j,endPName) {
   return(costDist)
 }
 
+getMinMaxG <- function (layer=NULL){
+  r.info<-rgrass7::execGRASS('r.info', flags=c("r","quiet"), map=layer,intern=TRUE)
+  min <- as.numeric(unlist(strsplit(r.info[1], split='=', fixed=TRUE))[2])
+  max <- as.numeric(unlist(strsplit(r.info[2], split='=', fixed=TRUE))[2])
+  return(c(min,max))
+  
+}
