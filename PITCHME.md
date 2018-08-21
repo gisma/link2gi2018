@@ -167,11 +167,11 @@ linkGRASS7(meuse_sf,select_ver=1)
 @[1-6](basic idea)
 
 ---
-- [SAGA & OTB basic usecase](https://github.com/gisma/link2gi2018/blob/master/R/usecases/saga_otb/usecaseSAGA_OTB.R)
+- [SAGA & OTB basic usecase](https://github.com/gisma/link2gi2018/R/usecases/saga_otb/usecaseSAGA_OTB.R)
 
-- [Canopy Height Model from UAV derived point clouds](https://github.com/gisma/link2gi2018/blob/master/R/usecases/uav-pc/usecaseCHM.R)
+- [Canopy Height Model from UAV derived point clouds](https://github.com/gisma/link2gi2018/R/usecases/uav-pc/usecaseCHM.R)
 
-- [beetle spread over high asia](https://github.com/gisma/link2gi2018/blob/master/R/usecases/cost-analysis/useCaseBeetle)
+- [beetle spread over high asia](https://github.com/gisma/link2gi2018/R/usecases/cost-analysis/useCaseBeetle)
 
 ---
 
