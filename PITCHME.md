@@ -157,6 +157,7 @@ linkGRASS7(meuse_sf,select_ver=1)
 ```
 ---
 ## Ok what next?
+
 - [SAGA & OTB basic usecase](https://github.com/gisma/link2gi2018/blob/master/R/usecases/saga_otb/usecaseSAGA_OTB.R)
 
 - [Canopy Height Model from UAV derived point clouds](https://github.com/gisma/link2gi2018/blob/master/R/usecases/uav-pc/usecaseCHM.R)
@@ -165,6 +166,10 @@ linkGRASS7(meuse_sf,select_ver=1)
 
 ---
 
+  For know have fun crossing the borders 
+  
+  and
+  
   Thank you for attention
   
 ---

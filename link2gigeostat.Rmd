@@ -10,7 +10,7 @@ output:
     toc: yes
   rmarkdown: default
 vignette: >
-  %\VignetteIndexEntry{Link GIS to R}
+  %\VignetteIndexEntry{Link GIS to R an introduction}
   %\VignetteEncoding{UTF-8}{inputenc}\
   %\VignetteEngine{knitr::knitr}
 editor_options: 
