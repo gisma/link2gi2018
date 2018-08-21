@@ -67,7 +67,7 @@ So why then even a package like @color[blue](**link2GI**)?
 
 +++ 
 
-##  To summarized
+##  To summarize
 @ul
 - from a R-User point of view without either sufficient privileges or not familiar with GIS-software also for fast prototyping it seems to be **helpful** to reduce as many of these problems as possible.
 
@@ -78,10 +78,11 @@ So why then even a package like @color[blue](**link2GI**)?
 ### What are the key features of link2GI?
 
   - GRASS 7.x, SAGA 2.x - current release,OTB - all releases
-  - detecting all/most existing intallations of GRASS7, SAGA, and Orfeo Toolbox
-    - providing correct temporary/permanent user envionments as required by the requested GIS software to support both command line and existing wrapper packages `RSAGA`, `rgrass7` 
-    - first version of a simple OTB wrapper 
+  - detects all/most existing intallations of GRASS7, SAGA, and Orfeo Toolbox
+  - provides correct temporary/permanent user envionments as required by the requested GIS software to support both command line and existing wrapper packages `RSAGA`, `rgrass7` 
+  - simplifying OTB calls via a first list-based OTB wrapper 
 
++++
 
 +++
 ### GRASS GIS
@@ -106,7 +107,7 @@ GDAL is perfectly integrated in R. However in some cases it is beneficial to use
 
 ### Get an overview what is running on your machine
 
-```R
+```
 ## load library
 require(link2GI)
 
@@ -136,7 +137,7 @@ C:\
 --- 
 ### Let's use meuse
 
-```R
+```
 # get meuse data as sp object
 require(link2GI)
 require(sp)
