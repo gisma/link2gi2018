@@ -130,9 +130,9 @@ Maybe you are surprised about the time consuming process (especially under Windo
 Please keep also in mind that the default locations are:
 ```
 # running Windows
-C:\
+searchLocation = "C:\"
 # running Linux
-/usr
+searchLocation = "/usr"
 ```
 --- 
 ### Let's use meuse
@@ -181,6 +181,7 @@ linkGRASS7(meuse_sf,select_ver=1)
 ---
   
 ```R
+# load libraries
 require(raster)
 require(sp)
 require(gdalUtils)
