@@ -102,36 +102,40 @@ So why then even a package like @color[blue](**link2GI**)?
 
 `GRASS GIS` has the most challenging requirements. It needs a bunch of environment and path variables as **and** a correct setup of the geographical data parameters. The `linkGRASS7` function tries to find all installations let you (optionally) choose the one you want to use and generate the necessary variables. As a result you can use both the rgrass7 package  or the command line `API` of `GRASS`.
 
---- 
++++
 ### SAGA GIS
 
 `SAGA GIS` is a far easier to set up. Again the `linkSAGA` function tries to find all `SAGA` installations, let you (optionally) choose one and generate the necessary variables. You may also use `RSAGA` but you have to hand over the result of `linkSAGA` like `RSAGA::rsaga.env(path = saga$sagaPath)`. For a straightforward usage you may simply use the  `R` system() call to  interface `R` with the `saga_cmd` API. 
 
---- 
++++ 
 ### OTB
 
 The `Orfeo Toolbox` (OTB) is a very powerful remote sensing toolbox. It is widely used for classification, filtering and machine learning applications. You will find some of the implemented algorithm within different R packages but **always** much slower or only running on small data chunks. Due to a missing wrapper the linkage is performed to use the command line API of the `OTB`. Currently link2GI provides very basic list-based `OTB` wrapper. 
 
---- 
++++
 ### GDAL
 GDAL is perfectly integrated in R. However in some cases it is beneficial to uses system calls and grab the binaries directly. `link2GI` generates a list of all pathes and commands so you may easily use also python scripts calls and other chains. 
 
 ---
+
 ## Basic Usage
+
+
 ### Get an overview what is running on your machine
-  
-```R
+
+```{R eval=TRUE}
+## load library
+require(link2GI)
+
 # find all GRASS GIS installations at the default search location
 grass <- link2GI::findGRASS()
 print(grass)
 
-# Same with SAGA and OTB
-
-# find all SAGA GIS installations at the default search location
-require(link2GI)
+# find all SAGA installations at the default search location
 saga <- link2GI::findSAGA()
 print(saga)
 
+# find all Orfeo Toolbox installations at the default search location
 otb <- link2GI::findOTB()
 print(otb)
 ```
@@ -195,7 +199,6 @@ beetleLocs<-read.csv2("~/proj/beetle/beetle.csv",header = TRUE,sep = ',',dec = '
 ```
 ---
 
-  ### main functions in link2GI
   
   
 ---
