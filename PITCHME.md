@@ -166,37 +166,13 @@ linkGRASS7(meuse_sf,select_ver=1)
 ---?code=R/usecases/saga_otb/useCaseSAGA_OTB.R
 @[1-6](basic idea)
 
----?code=R/usecases/canopy-height/useCaseCHM.R&title=UseCase derive canopy height model from UAV generated point cloud
-
----?code=R/usecases/cost-analysis/useCaseBeetle.R&title=UseCase running Beetles aka cost analysis
-
-
-
-@[1-6](load libraries and setup arguments)
-@[7-11](Setup project structure)
-@[13](Load beetle position)
-@[19](Load DEM file)
-@[23-25](Setup and link GRASS using the data set)
-@[27-31](Cost analysis wrapper function)
-
 ---
-  
-```R
-# load libraries
-require(raster)
-require(sp)
-require(gdalUtils)
-require(rgdal)
-tci<-FALSE
-projRootDir = "~/proj/beetle"
-link2GI::initProj(projRootDir = projRootDir, 
-                  projFolders =  c("run/","cost/"),
-                  global = TRUE,
-                  path_prefix ="path_" )
+- [SAGA & OTB basic usecase](https://github.com/gisma/link2gi2018/blob/master/R/usecases/saga_otb/usecaseSAGA_OTB.R)
 
-beetleLocs<-read.csv2("~/proj/beetle/beetle.csv",header = TRUE,sep = ',',dec = '.',stringsAsFactors=FALSE)
+- [Canopy Height Model from UAV derived point clouds](https://github.com/gisma/link2gi2018/blob/master/R/usecases/uav-pc/usecaseCHM.R)
 
-```
+- [beetle spread over high asia](https://github.com/gisma/link2gi2018/blob/master/R/usecases/cost-analysis/useCaseBeetle)
+
 ---
 
   Thank you for attention
