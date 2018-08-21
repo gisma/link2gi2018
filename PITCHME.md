@@ -40,62 +40,48 @@ So why then even a package like @color[blue](**link2GI**)?
 
 ---
 
-### Increasing demands...
+### There is a demand...
 @ul
-  - R is a widely used entry-level scripting language with low access threshold with an increasing number of users. 
-  - Increasing demand also for spatiotemporal data analysis 
-  - Still a lot of crucial everyday restrictions 
+  - R is a low entry-level scripting language 
+  - there is  an increasing demand for more complex spatio-temporal data analysis 
+  - In cross platform cross softrware usage there are still a lot of  everyday restrictions 
 @ulend
 +++
 
 ### The R-user phenomen 
 @ul
   
-  - If necessary a cumbersome, manual use of GIS GUIs for pre-, post-processing of data or data analysis, format conversion, etc. is common 
-  - The R-ish point of view of users is focusing on R solution and usually not highly involved in integrating API calls, system depending scripts etc. 
+  - R-users have often a R-ish **and** operating system point of view 
+  - R-Users are often use GIS GUIs for visualisation, pre-, inter- and post-processing outside from R which is killing all workflows
     
 @ulend
 +++
 
 ## The operating system phenomenon
 @ul
-    - Different and often user privileges
-    - Limited knowledge of system and command line
-    - Strange CLI behaviour dependiong on OS-type, -version and leads to cumbersome (cross platform) collaboration due to code incompatibilities etc. 
-    - extreme varying command line interpreter capabilities (Windows, Linux)
+    - restricted user privileges 
+    - lacking knowledge of operating system and command line
+    - cross platform shortcomings
 
 @ulend
 
---- 
++++ 
 
-##  If summarized
+##  To summarized
 @ul
 - from a R-User point of view without either sufficient privileges or not familiar with GIS-software also for fast prototyping it seems to be **helpful** to reduce as many of these problems as possible.
+
 - from a R-teacher point of view if you have 50 and more individually configured Laptops running under strange Linux distributions, Windows versions and MacOS, you will get an idea why it could be comfortable to automate the procedure of finding the correct API-bindings.
   
 @ulend
 ---
-### What are the key features so far?
+### What are the key features of link2GI?
 
-  - detecting all/most existing intallations of GRASS7, SAGA, and Orfeo Toolbox as well as GDAL binaries
-    - providing a correct temporary user envionment as required by the requested GIS software
-    - providing corresponding variables for an easy use of direct system calls
-    - providing seamless integration in the well known wrappper packages RSAGA, rgrass7 
-    - providing a alpha version of a simple OTB wrapper 
-    - providing some small helper functions 
+  - GRASS 7.x, SAGA 2.x - current release,OTB - all releases
+  - detecting all/most existing intallations of GRASS7, SAGA, and Orfeo Toolbox
+    - providing correct temporary/permanent user envionments as required by the requested GIS software to support both command line and existing wrapper packages `RSAGA`, `rgrass7` 
+    - first version of a simple OTB wrapper 
 
-+++
-
-### R-dependencies
-'raster', 'rgdal', 'gdalUtils', 'rgrass7', 'sp', 'sf'
-
-+++
-###  Supported GIS software 
-
-  - GRASS 7.x
-  - SAGA 2.x - current release
-  - OTB - all releases
-  - GDAL binaries - all releases
 
 +++
 ### GRASS GIS
@@ -123,7 +109,7 @@ GDAL is perfectly integrated in R. However in some cases it is beneficial to use
 
 ### Get an overview what is running on your machine
 
-```{R eval=TRUE}
+```R
 ## load library
 require(link2GI)
 
