@@ -43,17 +43,16 @@ So why then even a package like @color[blue](**link2GI**)?
 ### Increasing demands...
 @ul
   - R is a widely used entry-level scripting language with low access threshold with an increasing number of users. 
-  - Same with spatiotemporal data analysis 
-  - Crucial everyday restrictions 
+  - Increasing demand also for spatiotemporal data analysis 
+  - Still a lot of crucial everyday restrictions 
 @ulend
 +++
 
-## The R-user phenomen 
+### The R-user phenomen 
 @ul
   
-
-    - If necessary a cumbersome, manual use of GIS GUIs for pre-, post-processing of data or data analysis, format conversion, etc. is common 
-    - The R-ish point of view of users is focusing on R solution and usually not highly involved in integrating API calls, system depending scripts etc. 
+  - If necessary a cumbersome, manual use of GIS GUIs for pre-, post-processing of data or data analysis, format conversion, etc. is common 
+  - The R-ish point of view of users is focusing on R solution and usually not highly involved in integrating API calls, system depending scripts etc. 
     
 @ulend
 +++
@@ -76,7 +75,7 @@ So why then even a package like @color[blue](**link2GI**)?
   
 @ulend
 ---
-## What are the key features so far?
+### What are the key features so far?
 
   - detecting all/most existing intallations of GRASS7, SAGA, and Orfeo Toolbox as well as GDAL binaries
     - providing a correct temporary user envionment as required by the requested GIS software
@@ -87,11 +86,11 @@ So why then even a package like @color[blue](**link2GI**)?
 
 +++
 
-## R-dependencies
+### R-dependencies
 'raster', 'rgdal', 'gdalUtils', 'rgrass7', 'sp', 'sf'
 
 +++
-##  Supported GIS software 
+###  Supported GIS software 
 
   - GRASS 7.x
   - SAGA 2.x - current release
@@ -99,27 +98,27 @@ So why then even a package like @color[blue](**link2GI**)?
   - GDAL binaries - all releases
 
 +++
-## GRASS GIS
+### GRASS GIS
 
 `GRASS GIS` has the most challenging requirements. It needs a bunch of environment and path variables as **and** a correct setup of the geographical data parameters. The `linkGRASS7` function tries to find all installations let you (optionally) choose the one you want to use and generate the necessary variables. As a result you can use both the rgrass7 package  or the command line `API` of `GRASS`.
 
 --- 
-## SAGA GIS
+### SAGA GIS
 
 `SAGA GIS` is a far easier to set up. Again the `linkSAGA` function tries to find all `SAGA` installations, let you (optionally) choose one and generate the necessary variables. You may also use `RSAGA` but you have to hand over the result of `linkSAGA` like `RSAGA::rsaga.env(path = saga$sagaPath)`. For a straightforward usage you may simply use the  `R` system() call to  interface `R` with the `saga_cmd` API. 
 
 --- 
-## OTB
+### OTB
 
 The `Orfeo Toolbox` (OTB) is a very powerful remote sensing toolbox. It is widely used for classification, filtering and machine learning applications. You will find some of the implemented algorithm within different R packages but **always** much slower or only running on small data chunks. Due to a missing wrapper the linkage is performed to use the command line API of the `OTB`. Currently link2GI provides very basic list-based `OTB` wrapper. 
 
 --- 
-## GDAL
+### GDAL
 GDAL is perfectly integrated in R. However in some cases it is beneficial to uses system calls and grab the binaries directly. `link2GI` generates a list of all pathes and commands so you may easily use also python scripts calls and other chains. 
 
 ---
-# Basic Usage
-## Get an overview what is running on your machine
+## Basic Usage
+### Get an overview what is running on your machine
   
 ```R
 # find all GRASS GIS installations at the default search location
@@ -146,7 +145,7 @@ C:\
 /usr
 ```
 --- 
-## Linking the software
+### Linking the software
 
 ```R
 # get meuse data as sp object
@@ -196,7 +195,7 @@ beetleLocs<-read.csv2("~/proj/beetle/beetle.csv",header = TRUE,sep = ',',dec = '
 ```
 ---
 
-  ## main functions in link2GI
+  ### main functions in link2GI
   
   
 ---
