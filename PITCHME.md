@@ -162,7 +162,8 @@ linkGRASS7(meuse_sf,select_ver=1)
 - usecase cost analysis
 ---
 
----?code=R/usecases/saga_otb/useCaseSAGA_OTB.R&title=UseCase SAGA GIS and OTB CLI vs wrapper
+---?code=R/usecases/saga_otb/useCaseSAGA_OTB.R
+@[1-6](basic idea)
 
 ---?code=R/usecases/canopy-height/useCaseCHM.R&title=UseCase derive canopy height model from UAV generated point cloud
 
