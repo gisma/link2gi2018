@@ -40,49 +40,36 @@ So why then even a package like @color[blue](**link2GI**)?
 
 ---
 
-### There is a demand...
+### Demands and shortcomings
 @ul
-  - R is a low entry-level scripting language 
-  - there is  an increasing demand for more complex spatio-temporal data analysis 
-  - In cross platform cross softrware usage there are still a lot of  everyday restrictions 
-@ulend
-+++
-
-### The R-user phenomen 
-@ul
-  
-  - R-users have often a R-ish **and** operating system point of view 
-  - R-Users are often use GIS GUIs for visualisation, pre-, inter- and post-processing outside from R which is killing all workflows
+  - R is a low entry-level scripting language for geo-spatial tasks
+  - Plus there is an increasing demand for (complex) spatio-temporal data analysis 
+  - Cross platform/ cross software collaboration is still cumbersome
+   - restricted user privileges 
+  - lacking knowledge of operating system,command line
+  - cross platform shortcomings
+  - software (R) **and** operating system (whatever) focused point of view 
+  - Missing functionality/knowledge leads to broken workflows, so interactive / manual usage of external GIS software is common
     
 @ulend
 +++
 
-## The operating system phenomenon
-@ul
-    - restricted user privileges 
-    - lacking knowledge of operating system and command line
-    - cross platform shortcomings
+##  Some benefits
+- From a typical R-User point of view without either sufficient privileges or not familiar with GIS-software or the operating system it seems to be at least **helpful** to reduce some of this issues
 
-@ulend
+- from a teaching point of view it would be great to avoid the nightmare to adapt individual laptop configurations or lab restrictions.
 
-+++ 
-
-##  To summarize
-@ul
-- from a R-User point of view without either sufficient privileges or not familiar with GIS-software also for fast prototyping it seems to be **helpful** to reduce as many of these problems as possible.
-
-- from a R-teacher point of view if you have 50 and more individually configured Laptops running under strange Linux distributions, Windows versions and MacOS, you will get an idea why it could be comfortable to automate the procedure of finding the correct API-bindings.
+- from a R-developer point of view it is helpful to enable the integration of fast and relieble algorithms of mature software systems
   
 @ulend
 ---
-### What are the key features of link2GI?
+### Features of link2GI so far
 
-  - GRASS 7.x, SAGA 2.x - current release,OTB - all releases
+  - supports GRASS 7.x +, SAGA 2.x +, OTB - all releases
   - detects all/most existing intallations of GRASS7, SAGA, and Orfeo Toolbox
-  - provides correct temporary/permanent user envionments as required by the requested GIS software to support both command line and existing wrapper packages `RSAGA`, `rgrass7` 
-  - simplifying OTB calls via a first list-based OTB wrapper 
+  - provides working temporary/permanent user envionments as required by the corresponding GIS software for command line and  wrapper packages `RSAGA`, `rgrass7` usage
+  - simplifies OTB calls via a first list-based OTB wrapper 
 
-+++
 
 +++
 ### GRASS GIS
@@ -156,11 +143,14 @@ meuse_sf = st_as_sf(meuse,
 linkGRASS7(meuse_sf,select_ver=1)
 ```
 ---
-### Ok what next?
+### Hands on
 - Use the [vignette](https://github.com/gisma/link2gi2018/blob/master/R/vignette/link2gigeostat.Rmd) for more basic examples
 - Dive into the usecases for getting an idea how to use link2GI
 ---
 ### Usecases
+- [Analysing the ECA&D climatic data](https://github.com/gisma/link2gi2018/blob/master/R/usecases/saga_otb/useCaseGRASS_Neteler2018.R)
+- [Derivation of micro climate parameters](https://github.com/gisma/link2gi2018/blob/master/R/usecases/saga_otb/usecasepredict-compet.R.R)
+
 - [SAGA & OTB basic usecase](https://github.com/gisma/link2gi2018/blob/master/R/usecases/saga_otb/usecaseSAGA_OTB.R)
 
 - [Canopy Height Model from UAV derived point clouds](https://github.com/gisma/link2gi2018/blob/master/R/usecases/uav-pc/usecaseCHM.R)
