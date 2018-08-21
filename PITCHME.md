@@ -108,7 +108,7 @@ GDAL is perfectly integrated in R. However in some cases it is beneficial to use
 ### Get an overview what is running on your machine
 
 ```
-## load library
+# load library
 require(link2GI)
 
 # find all GRASS GIS installations at the default search location
@@ -160,6 +160,7 @@ linkGRASS7(meuse_sf,select_ver=1)
 - usecase basic SAGA OTB
 - usecase processing UAV -derived pointclouds
 - usecase cost analysis
+---
 
 ---?code=R/usecases/saga_otb/useCaseSAGA_OTB.R&title=UseCase SAGA GIS and OTB CLI vs wrapper
 
