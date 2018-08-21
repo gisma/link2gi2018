@@ -104,9 +104,6 @@ GDAL is perfectly integrated in R. However in some cases it is beneficial to use
 
 ---
 
-## Basic Usage
-
-
 ### Get an overview what is running on your machine
 
 ```R
@@ -125,6 +122,8 @@ print(saga)
 otb <- link2GI::findOTB()
 print(otb)
 ```
+---
+
 Maybe you are surprised about the time consuming process (especially under Windows) and also the results. It is the probably fastest brute force way to search the whole device for relevant entries...
 
 Please keep also in mind that the default locations are:
