@@ -2,32 +2,37 @@
 
 ### GEOSTAT Summer School
 **Prague, 24th August 2018** - [GEOSTAT 2018](https://geostat-course.org/2018)
+
 Chris Reudenbach
-reudenbach@uni-marburg.de
-@creuden
+
+
 
 ---
-About me:
+### About me:
 
-- Faculty of Geography 
+- Faculty of Geography University of Marburg (Germany)
  originally atmosperic and climate remote sensing and numerical modeling
 - working on several fields of GIS and RS most of the time trying to solve problems coming along
 - last few years joing the spatial R world using it as a lingua franca for linking whatever together 
 
+reudenbach@uni-marburg.de
+
+@creuden
+
 ---
-## Why this talk?
+### Why this talk?
 - To have an excuse to join the meeting and learn
 - To show how fast and dirty you may use tons of great software out of the R-universe
 - To find out if it make sense to devolp the link2GI tool as a comprehensive wrap-the-wrapper tool
 ---
-# What is link2GI?
+### What is link2GI?
 
 The [**LINK2gi**](https://CRAN.R-project.org/package=link2GI) package provides an small tool for linking GRASS, SAGA GIS and QGIS as well as other awesome command line tools like the Orfeo Toolbox (OTB) for R users that are not operating system specialists or highly experienced GIS users. 
 
 
 ---
   
-## Why link2GI...?
+### Why link2GI...?
 
 Taking into account the great capabilities of GRASS like shown by Markus and Veronika or the great accessibility of QGIS as demonstrated by Jannis there seems to be no need for a common meta interface. 
 
@@ -35,13 +40,12 @@ So why then even a package like @color[blue](**link2GI**)?
 
 ---
 
-## Increasing demand
-
+### Increasing demands...
+@ul
   - R is a widely used entry-level scripting language with low access threshold with an increasing number of users. 
-
   - Same with spatiotemporal data analysis 
   - Crucial everyday restrictions 
-
+@ulend
 +++
 
 ## The R-user phenomen 
@@ -50,10 +54,12 @@ So why then even a package like @color[blue](**link2GI**)?
 
     - If necessary a cumbersome, manual use of GIS GUIs for pre-, post-processing of data or data analysis, format conversion, etc. is common 
     - The R-ish point of view of users is focusing on R solution and usually not highly involved in integrating API calls, system depending scripts etc. 
-
+    
+@ulend
 +++
 
 ## The operating system phenomenon
+@ul
     - Different and often user privileges
     - Limited knowledge of system and command line
     - Strange CLI behaviour dependiong on OS-type, -version and leads to cumbersome (cross platform) collaboration due to code incompatibilities etc. 
@@ -63,12 +69,12 @@ So why then even a package like @color[blue](**link2GI**)?
 
 --- 
 
-## ... last but not least
-
+##  If summarized
+@ul
 - from a R-User point of view without either sufficient privileges or not familiar with GIS-software also for fast prototyping it seems to be **helpful** to reduce as many of these problems as possible.
 - from a R-teacher point of view if you have 50 and more individually configured Laptops running under strange Linux distributions, Windows versions and MacOS, you will get an idea why it could be comfortable to automate the procedure of finding the correct API-bindings.
   
-
+@ulend
 ---
 ## What are the key features so far?
 
