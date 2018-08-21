@@ -156,8 +156,11 @@ meuse_sf = st_as_sf(meuse,
 linkGRASS7(meuse_sf,select_ver=1)
 ```
 ---
-## Ok what next?
-
+### Ok what next?
+- Use the [vignette](https://github.com/gisma/link2gi2018/blob/master/R/vignette/link2gigeostat.Rmd) for more basic examples
+- Dive into the usecases for getting an idea how to use link2GI
+---
+### Usecases
 - [SAGA & OTB basic usecase](https://github.com/gisma/link2gi2018/blob/master/R/usecases/saga_otb/usecaseSAGA_OTB.R)
 
 - [Canopy Height Model from UAV derived point clouds](https://github.com/gisma/link2gi2018/blob/master/R/usecases/uav-pc/usecaseCHM.R)
