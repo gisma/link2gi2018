@@ -107,7 +107,7 @@ GDAL is perfectly integrated in R. However in some cases it is beneficial to use
 
 ### Get an overview what is running on your machine
 
-```
+```R
 # load library
 require(link2GI)
 
@@ -138,7 +138,7 @@ searchLocation = "/usr"
 
 ### Let's use meuse
 
-``` R
+```R
 # get meuse data as sp object
 require(link2GI)
 require(sp)
@@ -154,7 +154,7 @@ meuse_sf = st_as_sf(meuse,
 # create a temporary GRASS linkage using the meuse data
 
 linkGRASS7(meuse_sf,select_ver=1)
-```,
+```
 ---
 ## Ok what next?
 
