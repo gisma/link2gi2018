@@ -128,16 +128,17 @@ print(otb)
 Maybe you are surprised about the time consuming process (especially under Windows) and also the results. It is the probably fastest brute force way to search the whole device for relevant entries...
 
 Please keep also in mind that the default locations are:
-```
+``` R
 # running Windows
 searchLocation = "C:\"
 # running Linux
 searchLocation = "/usr"
 ```
 --- 
+
 ### Let's use meuse
 
-```
+``` R
 # get meuse data as sp object
 require(link2GI)
 require(sp)
