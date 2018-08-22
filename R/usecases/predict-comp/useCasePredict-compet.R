@@ -8,8 +8,6 @@ require(gdalUtils)
 require(rgdal)
 
 ### define arguments
-## project root directory
-projRootDir = "~/proj/makeparams"
 
 # project folder
 if (Sys.info()["sysname"] == "Windows"){
