@@ -13,19 +13,16 @@
 
 cat("setting arguments loading libs and data\n")
 require(raster)
-require(sp)
+require(rgrass7)
 require(gdalUtils)
 require(rgdal)
 
 ### define arguments
-## project root directory
-projRootDir = "~/proj/beetlespread"
-
 # project folder
 if (Sys.info()["sysname"] == "Windows"){
-  projRootDir<-"C:/Users/User/Documents/proj/tutorials/link2GI2018/cost-analysis"
+  projRootDir<-"C:/Users/User/Documents/proj/tutorials/link2gi2018/cost-analysis"
 } else {
-  projRootDir<-"~/proj/tutorials/link2GI2018/cost-analysis"
+  projRootDir<-"~/proj/tutorials/link2gi2018/cost-analysis"
 }
 
 ## define costType

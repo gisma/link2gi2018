@@ -2,19 +2,17 @@
 
 
 cat("setting arguments loading libs and data\n")
+require(link2GI)
 require(raster)
-require(uavRst)
-require(sp)
-require(gdalUtils)
-require(rgdal)
+require(rgrass7)
 
 ### define arguments
 ## project root directory
 
 if (Sys.info()["sysname"] == "Windows"){
-  projRootDir<-"C:/Users/User/Documents/proj/tutorials/link2GI2018/grassreload/"
+  projRootDir<-"C:/Users/User/Documents/proj/tutorials/link2giI2018/grassreload/"
 } else {
-  projRootDir<-"~/proj/tutorials/link2GI2018/grassreload/"
+  projRootDir<-"~/proj/tutorials/link2gi2018/grassreload/"
 }
 
 
@@ -24,36 +22,6 @@ link2GI::initProj(projRootDir = projRootDir,
                   projFolders =  c("run/","src/","grassdata/","geodata/"),
                   global = TRUE,
                   path_prefix ="path_gr_" )
-
-## source functions
-#source(paste0(path_gr_src,"gCost.R"))
-
-### get beetle localities and clean it up for a least path and random walk cost analysis
-## read beetle positions
-#beetleLocs = read.csv2(paste0(path_gr_data,"beetle.csv"),header = TRUE,sep = ',',dec = '.',stringsAsFactors=FALSE)
-# 
-# # drop all attributes except lon lat
-# keeps  =  c("lon","lat")
-# beetleLocs = beetleLocs[keeps]
-# 
-# # make it spatial
-# coordinates(beetleLocs) =  ~lon+lat
-# proj4string(beetleLocs) =  CRS("+proj=longlat +datum=WGS84")
-# 
-# # get extent for data retrieval
-# xtent = extent(beetleLocs)
-# 
-# # remove duplicate locations
-# uniqueBeetleLocations  = remove.duplicates(beetleLocs, zero = 0.0, remove.second = TRUE, memcmp = TRUE)
-# 
-# # sort locations by longitude
-# uniqueBeetleLocations= uniqueBeetleLocations[order(uniqueBeetleLocations$lon, decreasing=TRUE),]
-# cat ("dataframe cleaned and converted\n")
-# # 
-
-## assign the DEM data setinitialize the GRASS SAGA and extent settings
-fnDEM = path.expand(paste0(path_gr_grassdata,"ecad_v17/elev_v17.tif"))
-
 
 ##--link2GI-- linking GRASS project structure using the information from the DEM raster
 link2GI::linkGRASS7(gisdbase = path_gr_grassdata,
@@ -83,7 +51,7 @@ system('v.support country_boundaries map_name="Admin0 boundaries from NaturalEar
 system("v.info -c country_boundaries")
 
 
-# import DEM to GRASS
+##--rgrass7-- import DEM to GRASS
 rgrass7::execGRASS('r.in.gdal',
                    flags=c('o',"overwrite","quiet"),
                    input=path.expand(paste0(path_gr_geodata,"ecad_v17/elev_v17.tif")), 
@@ -92,6 +60,7 @@ rgrass7::execGRASS('r.in.gdal',
 )
 
 system("r.colors map=elev_v17 color=elevation")
+##--rgrass7-- 
 rgrass7::execGRASS(cmd = "g.region", raster="precip.1951_1980.01.sum@ecad17")
 system("g.region raster=precip.1951_1980.01.sum@ecad17",ignore.stdout = FALSE)
 system('r.series --overwrite input=`g.list rast pattern="precip.1981_2010.*.sum" sep="comma"` output=precip.1981_2010.annual.sum method=sum
@@ -105,3 +74,4 @@ tmean.1981_2010.annual.avg<-raster::raster(rgrass7::readRAST("tmean.1981_2010.an
 mapview::mapview(precip.1981_2010.annual.sum) + tmean.1981_2010.annual.avg
 
 stat<-system2(command = "r.univar", args = 'tmean.1981_2010.annual.avg -e -g',stdout = TRUE,stderr = TRUE)
+stat

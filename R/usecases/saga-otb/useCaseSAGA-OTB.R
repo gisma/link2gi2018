@@ -10,19 +10,19 @@ require(raster)
 
 # os switch for permant project folder
 if (Sys.info()["sysname"] == "Windows"){
-  projRootDir<-"C:/Users/User/Documents/proj/tutorials/link2GI2018/saga-otb"
+  projRootDir<-"C:/Users/User/Documents/proj/tutorials/link2gi2018/saga-otb"
 } else {
-  projRootDir<-"~/proj/tutorials/link2GI2018/saga-otb"
+  projRootDir<-"~/proj/tutorials/link2gi2018/saga-otb"
 }
 
 ## define proj subfolders
-projFolders = c("data/","data/ref/","output/","run/","las/","scr/")
+projFolders = c("data/","run/","las/")
 
 # set export folder pathes as global to TRUE
 global = TRUE
 
 # define prefix for global variables 
-path_prefix = "path_"
+path_prefix = "path_SO_"
 
 
 
@@ -34,16 +34,16 @@ paths<-link2GI::initProj(projRootDir = projRootDir,
                          path_prefix = path_prefix)
 
 # overide OS related trailing backslash issue
-unzip_path_run<-ifelse(Sys.info()["sysname"]=="Windows", sub("/$", "",path_run),path_run)
+unzip_path_run<-ifelse(Sys.info()["sysname"]=="Windows", sub("/$", "",path_SO_run),path_SO_run)
 
-#setwd(path_run)       
+#setwd(path_SO_run)       
 
-unlink(paste0(path_run,"*"), force = TRUE)
+unlink(paste0(path_SO_run,"*"), force = TRUE)
 
 ## download the tutorial data set 
 url <- "https://github.com/gisma/gismaData/raw/master/uavRst/data/tutorial.zip"
-res <- curl::curl_download(url, paste0(path_run,"tutorial.zip"))
-utils::unzip(zipfile = res, exdir = unzip_path_run)
+res <- curl::curl_download(url, paste0(path_SO_run,"tutorial.zip"))
+utils::unzip(zipfile = res, exdir = unzip_path_SO_run)
 
 # create the links to the GI software
 ## giLinks<-uavRst::get_gi()
@@ -54,46 +54,46 @@ otb<-linkOTB()
 env<-RSAGA::rsaga.env(path = saga$sagaPath)
 
 
-demFileName <- Sys.glob(paths = paste0(path_run,"chm*","tif"))[1]
+demFileName <- Sys.glob(paths = paste0(path_SO_run,"chm*","tif"))[1]
 rdem<-raster::raster( demFileName)
-raster::writeRaster(rdem,paste0(path_run,"SAGA_dem.sdat"),overwrite = TRUE,NAflag = 0)
+raster::writeRaster(rdem,paste0(path_SO_run,"SAGA_dem.sdat"),overwrite = TRUE,NAflag = 0)
 
 # (SAGA_API) standard morhpometry via system call
 system(paste0(saga$sagaCmd," ta_morphometry 0 ",
-              " -ELEVATION ", path_run,"SAGA_dem.sgrd",
+              " -ELEVATION ", path_SO_run,"SAGA_dem.sgrd",
               " -UNIT_SLOPE 1 ",
               " -UNIT_ASPECT 1 ",
-              " -SLOPE ",path_run,"rt_slope.sgrd ", 
-              " -ASPECT ",path_run,"rt_aspect.sgrd ",
-              " -C_TANG ",path_run,"rt_tangcurve.sgrd ",
-              " -C_PROF ",path_run,"rt_profcurve.sgrd ",
-              " -C_MINI ",path_run,"rt_mincurve.sgrd ",
-              " -C_MAXI ",path_run,"rt_maxcurve.sgrd"))
+              " -SLOPE ",path_SO_run,"rt_slope.sgrd ", 
+              " -ASPECT ",path_SO_run,"rt_aspect.sgrd ",
+              " -C_TANG ",path_SO_run,"rt_tangcurve.sgrd ",
+              " -C_PROF ",path_SO_run,"rt_profcurve.sgrd ",
+              " -C_MINI ",path_SO_run,"rt_mincurve.sgrd ",
+              " -C_MAXI ",path_SO_run,"rt_maxcurve.sgrd"))
 
 # (RSAGA)
 RSAGA::rsaga.geoprocessor(lib = "ta_morphometry", module = 0,
-                          param = list(ELEVATION = paste(path_run,"SAGA_dem.sgrd", sep = ""), 
+                          param = list(ELEVATION = paste(path_SO_run,"SAGA_dem.sgrd", sep = ""), 
                                        UNIT_SLOPE = 1,
                                        UNIT_ASPECT = 1, 
-                                       SLOPE = paste(path_run,"SLOPE.sgrd", sep = ""),
-                                       ASPECT = paste(path_run,"ASPECT.sgrd", sep = ""),
-                                       C_PROF = paste(path_run,"C_PROF.sgrd", sep = ""),
-                                       C_TANG = paste(path_run,"C_TANG.sgrd", sep = ""),
-                                       C_MINI = paste(path_run,"C_MINI.sgrd", sep = ""),
-                                       C_MAXI = paste(path_run,"C_MAXI.sgrd", sep = "")),
+                                       SLOPE = paste(path_SO_run,"SLOPE.sgrd", sep = ""),
+                                       ASPECT = paste(path_SO_run,"ASPECT.sgrd", sep = ""),
+                                       C_PROF = paste(path_SO_run,"C_PROF.sgrd", sep = ""),
+                                       C_TANG = paste(path_SO_run,"C_TANG.sgrd", sep = ""),
+                                       C_MINI = paste(path_SO_run,"C_MINI.sgrd", sep = ""),
+                                       C_MAXI = paste(path_SO_run,"C_MAXI.sgrd", sep = "")),
                           show.output.on.console = TRUE, invisible = TRUE,
                           env = env)
 
 RSAGA::rsaga.geoprocessor(lib = "ta_morphometry", module = 28,
-                          param = list(DEM = paste(path_run,"SAGA_dem.sgrd", sep = ""), 
+                          param = list(DEM = paste(path_SO_run,"SAGA_dem.sgrd", sep = ""), 
                                        SCALE_MIN = 1,
                                        SCALE_MAX = 8,
                                        SCALE_NUM = 2,
-                                       TPI = paste(path_run,"MTPI.sgrd", sep = "")),
+                                       TPI = paste(path_SO_run,"MTPI.sgrd", sep = "")),
                           show.output.on.console = TRUE,invisible = TRUE,
                           env = env)
 
-raster::plot(raster::raster(paste(path_run,"MTPI.sdat", sep = "")))      
+raster::plot(raster::raster(paste(path_SO_run,"MTPI.sdat", sep = "")))      
 ## OTB example
 
 ### basic OTB example tackling it down by knowing the command line parameters
@@ -104,13 +104,13 @@ command<-paste(command, " -in ", demFileName )
 ## define concatenate the channel (band)
 command<-paste(command, " -channel ", 1)
 ## define concatenate the output filname
-command<-paste(command, " -out ", paste0(path_run,"otb_stat.tif"))
+command<-paste(command, " -out ", paste0(path_SO_run,"otb_stat.tif"))
 ## define kernel radius
 command<-paste(command, " -radius ",15)
 ## make the API call
 system(command,intern = TRUE,ignore.stdout = TRUE,show.output.on.console = TRUE) 
 
-raster::plot(raster::raster(paste0(path_run,"otb_stat.tif")))
+raster::plot(raster::raster(paste0(path_SO_run,"otb_stat.tif")))
 
 
 ## if you do not want to parse it by reading the documentation use a very simple parser

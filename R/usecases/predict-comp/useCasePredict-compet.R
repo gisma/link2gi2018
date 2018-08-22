@@ -13,9 +13,9 @@ projRootDir = "~/proj/makeparams"
 
 # project folder
 if (Sys.info()["sysname"] == "Windows"){
-  projRootDir<-"C:/Users/User/Documents/proj/tutorials/predict-compet"
+  projRootDir<-"C:/Users/User/Documents/proj/tutorials/link2gi2018predict-compet"
 } else {
-  projRootDir<-"~/proj/tutorials/link2GI2018/predict-compet"
+  projRootDir<-"~/proj/tutorials/link2gi2018/predict-compet"
 }
 
 ## define costType
