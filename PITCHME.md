@@ -137,7 +137,7 @@ linkGRASS7(meuse_sf,select_ver=1)
 ---
 ### Usecases
 - [Analysing the ECA&D climatic data](https://github.com/gisma/link2gi2018/blob/master/R/usecases/saga_otb/useCaseGRASS_Neteler2018.R)
-- [Derivation of micro climate parameters](https://github.com/gisma/link2gi2018/blob/master/R/usecases/saga_otb/usecasepredict-compet.R.R)
+- [The Prediction competition parameters](https://github.com/gisma/link2gi2018/blob/master/R/usecases/saga_otb/useCasePredict-compet.R)
 
 - [SAGA & OTB basic usecase](https://github.com/gisma/link2gi2018/blob/master/R/usecases/saga_otb/usecaseSAGA_OTB.R)
 

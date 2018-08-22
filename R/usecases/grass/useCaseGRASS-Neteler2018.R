@@ -1,4 +1,11 @@
-#' Microclimate Data
+#' Adapting parts of the tutorial
+#' https://neteler.gitlab.io/grass-gis-analysis/02_grass-gis_ecad_analysis/
+#' of Marcus Neteler and Veronica Andreo
+#' 
+#' This usecase is just giving you an idea how quick and dirty you may 
+#' integrate GRASS shell commandline code to a R script
+#' Most of the comments and command lines are just copy and paste
+#' from Markus Netelers tutorial script 
 
 
 cat("setting arguments loading libs and data\n")
@@ -7,8 +14,9 @@ require(raster)
 require(rgrass7)
 
 ### define arguments
-## project root directory
 
+
+# define root folder
 if (Sys.info()["sysname"] == "Windows"){
   projRootDir<-"C:/Users/User/Documents/proj/tutorials/link2giI2018/grassreload/"
 } else {
@@ -28,7 +36,7 @@ link2GI::linkGRASS7(gisdbase = path_gr_grassdata,
                     location = "ecad17_ll",
                     gisdbase_exist = TRUE) 
 
-# Add the mapset "ecad17" to the search path
+# Add the mapset "ecad17" and "user1" to the search path
 system("g.mapsets mapset=ecad17 operation=add")+
 system("g.mapsets mapset=user1 operation=add")
 system("g.mapsets -p")
@@ -50,7 +58,6 @@ system('v.support country_boundaries map_name="Admin0 boundaries from NaturalEar
 # show attibute table colums
 system("v.info -c country_boundaries")
 
-
 ##--rgrass7-- import DEM to GRASS
 rgrass7::execGRASS('r.in.gdal',
                    flags=c('o',"overwrite","quiet"),
@@ -58,20 +65,27 @@ rgrass7::execGRASS('r.in.gdal',
                    output='elev_v17',
                    band=1
 )
-
+# color it (works even if you are not looking at it)
 system("r.colors map=elev_v17 color=elevation")
-##--rgrass7-- 
+
+##--rgrass7-- Set the computational region to the full raster map (bbox and spatial resolution)  
 rgrass7::execGRASS(cmd = "g.region", raster="precip.1951_1980.01.sum@ecad17")
-system("g.region raster=precip.1951_1980.01.sum@ecad17",ignore.stdout = FALSE)
+#same as above command using  a system call
+system("g.region raster=precip.1951_1980.01.sum@ecad17")
+
+# Now use the r.series command to create annual precip map for the period 1951 to 1980
 system('r.series --overwrite input=`g.list rast pattern="precip.1981_2010.*.sum" sep="comma"` output=precip.1981_2010.annual.sum method=sum
 ')
+# Aggregate the temperature maps average annual temperature
 system('r.series --overwrite input=`g.list rast pattern="tmean.1981_2010.*.avg" sep="comma"` output=tmean.1981_2010.annual.avg method=average
 ')
-
+# read results to R
 precip.1981_2010.annual.sum<-raster::raster(rgrass7::readRAST("precip.1981_2010.annual.sum"))
 tmean.1981_2010.annual.avg<-raster::raster(rgrass7::readRAST("tmean.1981_2010.annual.avg"))
 
+# use mapview for visualisation
 mapview::mapview(precip.1981_2010.annual.sum) + tmean.1981_2010.annual.avg
 
+# Compute extended univariate statistics
 stat<-system2(command = "r.univar", args = 'tmean.1981_2010.annual.avg -e -g',stdout = TRUE,stderr = TRUE)
 stat
