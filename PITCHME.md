@@ -3,17 +3,15 @@
 ### GEOSTAT Summer School
 **Prague, 24th August 2018** - [GEOSTAT 2018](https://geostat-course.org/2018)
 
-Chris Reudenbach
+@css[bio-byline](Chris Reudenbach Faculty of Geography University of Marburg (Germany))
 
-
-
+@css[bio-byline](@fa[github pad-fa] gisma @fa[twitter pad-fa] @Creuden
+@fa[email pad-fa] reudenbach@uni-marburg.de)
 ---
 ### About me:
 
-- Faculty of Geography University of Marburg (Germany)
- originally atmosperic and climate remote sensing and numerical modeling
-- working on several fields of GIS and RS most of the time trying to solve problems coming along
-- last few years joing the spatial R world using it as a lingua franca for linking whatever together 
+Faculty of Geography University of Marburg (Germany)
+
 
 reudenbach@uni-marburg.de
 
