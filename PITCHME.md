@@ -5,8 +5,7 @@
 Chris Reudenbach 
 Faculty of Geography University of Marburg (Germany))
 
-
-@fa[github fa-4x] gisma @fa[twitter fa-4x] @Creuden
+@fa[github fa-0.5x] gisma @fa[twitter fa-1x] @Creuden
 ---
 
 ### Why this talk?
