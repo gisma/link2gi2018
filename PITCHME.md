@@ -4,7 +4,7 @@
 **Prague, 24th August 2018** - [GEOSTAT 2018](https://geostat-course.org/2018)
 
 @css[bio-byline](Chris Reudenbach Faculty of Geography University of Marburg (Germany))
-
+@snap[south] @fa[github fa-4x] gisma @snapend
 @css[bio-byline](@fa[github pad-fa] gisma @fa[twitter pad-fa] @Creuden
 @fa[email pad-fa] reudenbach@uni-marburg.de)
 ---
