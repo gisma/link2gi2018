@@ -136,7 +136,7 @@ linkGRASS7(meuse_sf,select_ver=1)
 - Dive into the usecases for getting an idea how to use link2GI
 ---
 ### Usecases
-- [Analysing the ECA&D climatic data](https://github.com/gisma/link2gi2018/blob/master/R/usecases/saga_otb/useCaseGRASS-Neteler2018.R)
+- [Analysing the ECA&D climatic data](https://github.com/gisma/link2gi2018/blob/master/R/usecases/grass/useCaseGRASS-Neteler2018.R)
 - [The Prediction competition parameters](https://github.com/gisma/link2gi2018/blob/master/R/usecases/saga_otb/useCasePredictcompet.R)
 
 - [SAGA & OTB basic usecase](https://github.com/gisma/link2gi2018/blob/master/R/usecases/saga_otb/usecaseSAGA_OTB.R)
