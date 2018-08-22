@@ -1,23 +1,14 @@
 # Introduction to link2GI
 
-### GEOSTAT Summer School
 **Prague, 24th August 2018** - [GEOSTAT 2018](https://geostat-course.org/2018)
 
-@css[bio-byline](Chris Reudenbach Faculty of Geography University of Marburg (Germany))
-@snap[south] @fa[github fa-4x] gisma @snapend
-@css[bio-byline](@fa[github pad-fa] gisma @fa[twitter pad-fa] @Creuden
-@fa[email pad-fa] reudenbach@uni-marburg.de)
+Chris Reudenbach 
+Faculty of Geography University of Marburg (Germany))
+
+
+@fa[github fa-4x] gisma @fa[twitter fa-4x] @Creuden
 ---
-### About me:
 
-Faculty of Geography University of Marburg (Germany)
-
-
-reudenbach@uni-marburg.de
-
-@creuden
-
----
 ### Why this talk?
 - To have an excuse to join the meeting and learn
 - To show how fast and dirty you may use tons of great software out of the R-universe
