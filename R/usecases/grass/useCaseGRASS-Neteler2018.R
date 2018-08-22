@@ -12,9 +12,9 @@ require(rgdal)
 ## project root directory
 
 if (Sys.info()["sysname"] == "Windows"){
-  projRootDir<-"C:/Users/User/Documents/proj/tutorials/grassreload/"
+  projRootDir<-"C:/Users/User/Documents/proj/tutorials/link2GI2018/grassreload/"
 } else {
-  projRootDir<-"~/proj/tutorials/geostat18/grassreload/"
+  projRootDir<-"~/proj/tutorials/link2GI2018/grassreload/"
 }
 
 
@@ -23,14 +23,14 @@ if (Sys.info()["sysname"] == "Windows"){
 link2GI::initProj(projRootDir = projRootDir, 
                   projFolders =  c("run/","src/","grassdata/","geodata/"),
                   global = TRUE,
-                  path_prefix ="path_" )
+                  path_prefix ="path_gr_" )
 
 ## source functions
-#source(paste0(path_src,"gCost.R"))
+#source(paste0(path_gr_src,"gCost.R"))
 
 ### get beetle localities and clean it up for a least path and random walk cost analysis
 ## read beetle positions
-#beetleLocs = read.csv2(paste0(path_data,"beetle.csv"),header = TRUE,sep = ',',dec = '.',stringsAsFactors=FALSE)
+#beetleLocs = read.csv2(paste0(path_gr_data,"beetle.csv"),header = TRUE,sep = ',',dec = '.',stringsAsFactors=FALSE)
 # 
 # # drop all attributes except lon lat
 # keeps  =  c("lon","lat")
@@ -52,11 +52,11 @@ link2GI::initProj(projRootDir = projRootDir,
 # # 
 
 ## assign the DEM data setinitialize the GRASS SAGA and extent settings
-fnDEM = path.expand(paste0(path_grassdata,"ecad_v17/elev_v17.tif"))
+fnDEM = path.expand(paste0(path_gr_grassdata,"ecad_v17/elev_v17.tif"))
 
 
 ##--link2GI-- linking GRASS project structure using the information from the DEM raster
-link2GI::linkGRASS7(gisdbase = path_grassdata,
+link2GI::linkGRASS7(gisdbase = path_gr_grassdata,
                     location = "ecad17_ll",
                     gisdbase_exist = TRUE) 
 
@@ -67,12 +67,12 @@ system("g.mapsets -p")
 
 ## download the tutorial data set 
 download <- curl::curl_download("https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_0_countries.zip",
-                           paste0(path_run,"ne_10m_admin_0_countries.zip"))
-utils::unzip(zipfile = download, exdir = path_geodata)
+                           paste0(path_gr_run,"ne_10m_admin_0_countries.zip"))
+utils::unzip(zipfile = download, exdir = path_gr_geodata)
 
 # import and check/fix topology
 system(paste0("v.import --overwrite input=",
-              paste0(path_geodata,"ne_10m_admin_0_countries.shp"),
+              paste0(path_gr_geodata,"ne_10m_admin_0_countries.shp"),
               " output=country_boundaries"))
 
 # add some metadata
@@ -86,7 +86,7 @@ system("v.info -c country_boundaries")
 # import DEM to GRASS
 rgrass7::execGRASS('r.in.gdal',
                    flags=c('o',"overwrite","quiet"),
-                   input=path.expand(paste0(path_geodata,"ecad_v17/elev_v17.tif")), 
+                   input=path.expand(paste0(path_gr_geodata,"ecad_v17/elev_v17.tif")), 
                    output='elev_v17',
                    band=1
 )

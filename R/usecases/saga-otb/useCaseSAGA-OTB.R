@@ -10,9 +10,9 @@ require(raster)
 
 # os switch for permant project folder
 if (Sys.info()["sysname"] == "Windows"){
-  projRootDir<-"C:/Users/User/Documents/proj/tutorials/geostat18"
+  projRootDir<-"C:/Users/User/Documents/proj/tutorials/link2GI2018/saga-otb"
 } else {
-  projRootDir<-"~/proj/tutorials/geostat18"
+  projRootDir<-"~/proj/tutorials/link2GI2018/saga-otb"
 }
 
 ## define proj subfolders

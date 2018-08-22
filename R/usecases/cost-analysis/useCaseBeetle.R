@@ -23,9 +23,9 @@ projRootDir = "~/proj/beetlespread"
 
 # project folder
 if (Sys.info()["sysname"] == "Windows"){
-  projRootDir<-"C:/Users/User/Documents/proj/tutorials/geostat18"
+  projRootDir<-"C:/Users/User/Documents/proj/tutorials/link2GI2018/cost-analysis"
 } else {
-  projRootDir<-"~/proj/tutorials/geostat18/cost"
+  projRootDir<-"~/proj/tutorials/link2GI2018/cost-analysis"
 }
 
 ## define costType
@@ -35,14 +35,14 @@ costType<- "tci"
 link2GI::initProj(projRootDir = projRootDir, 
                   projFolders =  c("run/","src/","data/"),
                   global = TRUE,
-                  path_prefix ="path_" )
+                  path_prefix ="path_ca_" )
 
 ## source functions
-source(paste0(path_src,"gCost.R"))
+source(paste0(path_ca_src,"gCost.R"))
 
 ### get beetle localities and clean it up for a least path and random walk cost analysis
 ## read beetle positions
-beetleLocs = read.csv2(paste0(path_data,"beetle.csv"),header = TRUE,sep = ',',dec = '.',stringsAsFactors=FALSE)
+beetleLocs = read.csv2(paste0(path_ca_data,"beetle.csv"),header = TRUE,sep = ',',dec = '.',stringsAsFactors=FALSE)
 
 # drop all attributes except lon lat
 keeps  =  c("lon","lat")
@@ -64,7 +64,7 @@ cat ("dataframe cleaned and converted\n")
 
 
 ## assign the DEM data setinitialize the GRASS SAGA and extent settings
-baseRaster = path.expand(paste0(path_data,"/dem.tif"))
+baseRaster = path.expand(paste0(path_ca_data,"/dem.tif"))
 
 ##--link2GI-- linking GRASS project structure using the information from the DEM raster
 link2GI::linkGRASS7(x = baseRaster, 
@@ -169,7 +169,7 @@ for (i in seq(1,length(allP))){
   
   # gather costs for all correspondingstP< start locations
   restP<-(allP[-i])
-  costDist[[i]]<-gcost(path_run,startP,restP)
+  costDist[[i]]<-gcost(path_ca_run,startP,restP)
 }
     
 
