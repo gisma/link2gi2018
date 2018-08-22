@@ -139,7 +139,7 @@ linkGRASS7(meuse_sf,select_ver=1)
 - [Analysing the ECA&D climatic data](https://github.com/gisma/link2gi2018/blob/master/R/usecases/grass/useCaseGRASS-Neteler2018.R)
 - [The Prediction competition parameters](https://github.com/gisma/link2gi2018/blob/master/R/usecases/saga_otb/useCasePredictcompet.R)
 
-- [SAGA & OTB basic usecase](https://github.com/gisma/link2gi2018/blob/master/R/usecases/saga_otb/usecaseSAGA_OTB.R)
+- [SAGA & OTB basic usecase](https://github.com/gisma/link2gi2018/blob/master/R/usecases/saga-otb/useCaseSAGA-OTB.R)
 
 - [Canopy Height Model from UAV derived point clouds](https://github.com/gisma/link2gi2018/blob/master/R/usecases/uav-pc/usecaseCHM.R)
 
