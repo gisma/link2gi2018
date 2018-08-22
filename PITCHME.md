@@ -98,7 +98,7 @@ print(saga)
 otb <- link2GI::findOTB()
 print(otb)
 ```
----
++++
 
 Maybe you are surprised about the time consuming process (especially under Windows) and also the results. It is the probably fastest brute force way to search the whole device for relevant entries...
 
@@ -147,9 +147,9 @@ linkGRASS7(meuse_sf,select_ver=1)
 
 ---
 
-  For know have fun crossing the borders 
+  For now, have fun crossing borders...
   
-  and
+  
   
   Thank you for attention
   
