@@ -3,7 +3,6 @@
 cat("setting arguments loading libs and data\n")
 require(raster)
 require(uavRst)
-require(sp)
 require(gdalUtils)
 require(rgdal)
 
@@ -16,170 +15,113 @@ if (Sys.info()["sysname"] == "Windows"){
   projRootDir<-"~/proj/tutorials/link2gi2018/predict-compet"
 }
 
-## define costType
-costType<- "tci"
-
 ##--link2GI-- create project folder structure, NOTE the tailing slash is obligate
 link2GI::initProj(projRootDir = projRootDir, 
                   projFolders =  c("run/","src/","data/"),
                   global = TRUE,
                   path_prefix ="path_pc_" )
 
-## source functions
-#source(paste0(path_pc_src,"gCost.R"))
-
-### get beetle localities and clean it up for a least path and random walk cost analysis
-## read beetle positions
-#beetleLocs = read.csv2(paste0(path_pc_data,"beetle.csv"),header = TRUE,sep = ',',dec = '.',stringsAsFactors=FALSE)
-# 
-# # drop all attributes except lon lat
-# keeps  =  c("lon","lat")
-# beetleLocs = beetleLocs[keeps]
-# 
-# # make it spatial
-# coordinates(beetleLocs) =  ~lon+lat
-# proj4string(beetleLocs) =  CRS("+proj=longlat +datum=WGS84")
-# 
-# # get extent for data retrieval
-# xtent = extent(beetleLocs)
-# 
-# # remove duplicate locations
-# uniqueBeetleLocations  = remove.duplicates(beetleLocs, zero = 0.0, remove.second = TRUE, memcmp = TRUE)
-# 
-# # sort locations by longitude
-# uniqueBeetleLocations= uniqueBeetleLocations[order(uniqueBeetleLocations$lon, decreasing=TRUE),]
-# cat ("dataframe cleaned and converted\n")
-# # 
-
-## assign the DEM data setinitialize the GRASS SAGA and extent settings
+## define filenames used
 fnDEM = path.expand(paste0(path_pc_data,"/DEM_5m.tif"))
 fnFT = path.expand(paste0(path_pc_data,"/Forest_types_10m.tif"))
+l8_1 = path.expand(paste0(path_pc_data,"/LC08_L1TP_191025_20130727_20170503_01_T1_sr_band1.tif"))
+l8_2 = path.expand(paste0(path_pc_data,"/LC08_L1TP_191025_20130727_20170503_01_T1_sr_band2.tif"))
+l8_3 = path.expand(paste0(path_pc_data,"/LC08_L1TP_191025_20130727_20170503_01_T1_sr_band3.tif"))
 
-# crop dsm/dtm data to the image file *extent* NOT RESOLUTION
-rdem<- raster::raster(fnDEM)
-rft<- raster::raster(fnFT)
-# crop dsm/dtm data to the image file *extent* NOT RESOLUTION
-rdem<- raster::crop(rdem,rft,x = )
+# read original raster data
+ rdem<- raster::raster(fnDEM)
+ rft<- raster::raster(fnFT)
+ # resample dtm and rgb to dsm 
+ dem10 <- raster::resample(rdem, rft , method = 'bilinear')
+ raster::writeRaster(dem10 ,paste0(path_pc_data,"/dem_10m_c.tif"))
 
-mapview(dem) + rft
-# resample dtm and rgb to dsm 
- dem <- raster::resample(rdem, rft , method = 'bilinear')
+# # crop reproject satellite data
+ l8_1p <- gdalwarp(srcfile =l8_1, dstfile = path.expand(paste0(path_pc_data,"/LC08__band1_p.tif")), 
+                   overwrite = TRUE,  
+                   t_srs = "+proj=krovak +lat_0=49.5 +lon_0=24.83333333333333 +k=0.9999 +x_0=0 +y_0=0 +ellps=bessel +towgs84=589,76,480,0,0,0,0 +units=m +no_defs",
+                   output_Raster = TRUE )  
+ l8_2p <- gdalwarp(srcfile =l8_2, dstfile = path.expand(paste0(path_pc_data,"/LC08__band2_p.tif")), 
+                   overwrite = TRUE,  
+                   t_srs = "+proj=krovak +lat_0=49.5 +lon_0=24.83333333333333 +k=0.9999 +x_0=0 +y_0=0 +ellps=bessel +towgs84=589,76,480,0,0,0,0 +units=m +no_defs",
+                   output_Raster = TRUE ) 
+ l8_3p <- gdalwarp(srcfile =l8_3, dstfile = path.expand(paste0(path_pc_data,"/LC08__band3_p.tif")), 
+                   overwrite = TRUE,  
+                   t_srs = "+proj=krovak +lat_0=49.5 +lon_0=24.83333333333333 +k=0.9999 +x_0=0 +y_0=0 +ellps=bessel +towgs84=589,76,480,0,0,0,0 +units=m +no_defs",
+                   output_Raster = TRUE ) 
+ # crop satellite data
+rl8_1 <- raster::crop(l8_1p,rdem)
+rl8_2 <- raster::crop(l8_3p,rdem)
+rl8_3 <- raster::crop(l8_3p,rdem)
 
- 
+# calculate some indices
+rgbi<-uavRst::rgb_indices(rl8_1,rl8_2,rl8_3,c("VARI", "NDTI", "RI",
+                                        "SCI", "BI", "SI", "HI", "TGI", "GLI", "NGRDI", "GRVI", "GLAI",
+                                        "CI"))
+# resample result to the 10 m resolution
+rgbi10 <- raster::resample(rgbi, rft , method = 'bilinear')
+
+# stack results so far
+predictors<-stack(rgbi10,dem10)
+
+# write it on storage
+raster::writeRaster(dem10,paste0(path_pc_run,"/dem_10m_c.tif"),overwrite=TRUE)
+raster::writeRaster(dem10,paste0(path_pc_run,"dem_10m_c.sdat"),overwrite = TRUE,NAflag = 0) 
+
 ##--link2GI-- linking GRASS project structure using the information from the DEM raster
 link2GI::linkGRASS7(x = dem ,
                     gisdbase = projRootDir,
-                    location = "params") 
-d<-SpatialPixels(SpatialPoints(coordinates(dem)[!is.na(values(dem)),]))
-rgrass7::writeRAST((dem))
+                    location = "spatcomp") 
+# link SAGA
+saga<-linkSAGA()
 
 # import DEM to GRASS
-rgrass7::execGRASS('r.external',
+rgrass7::execGRASS('r.in.gdal',
                    flags=c('o',"overwrite","quiet"),
-                   input=fnDEM, 
-                   output='dem',
-                   band=1
+                   input=paste0(path_pc_run,"/dem_10m_c.tif"), 
+                   output='dem10'
 )
 
 
 # The Topographic Convergence Index (TCI) provides an estimation
 # of rainwater runoff availability to plants based on specific catchment
 # area (A) and local slope (b) such that TCI = ln(A/tan b) (Beven & Kirkby, 1979)
-# this seems so be most suitable for the beetles
-### terraflow provides all basic parameters of an hydrological coorrected DEM
-### TODO accumulated flows (costs) vs. tci  up to now tci is used for walk and accu for drain
-cat("
-    ########## starting r.terraflow   ###########
-    
-    By default the  Topographic Convergence Index (Beven & Kirkby, 1979) is used.
-    ln[A/tan(slope)], A= upslope contributing area
-    NOTE: be patient it is TIME CONSUMING!\n")
 
 rgrass7::execGRASS('r.terraflow',
                    flags=c("overwrite"),
-                   elevation="dem",
-                   filled="filled",
+                   elevation="dem10",
                    direction="accudir",
                    swatershed="watershed",
-                   accumulation="accu",
                    tci="tci",
                    memory=8000,
                    stats="demstats.txt")
+# read and stack results
+tci<-raster::raster(rgrass7::readRAST("tci"))
+predictors<-stack(predictors,tci)
+watershed<-raster::raster(rgrass7::readRAST("watershed"))
+predictors<-stack(predictors,watershed)
 
+# call saga general terrain analysis
+system(paste0(saga$sagaCmd,' ta_compound  0', paste0(" -ELEVATION=",paste0(path_pc_run),"dem_10m_c.sgrd "),
+                                 paste0(" -SLOPE=",paste0(path_pc_run),"slope.sgrd "),
+                                 paste0(" -ASPECT=",paste0(path_pc_run),"aspect.sgrd "),
+                                 paste0(" -CONVERGENCE=",paste0(path_pc_run),"convergence.sgrd "),
+                                 paste0(" -WETNESS=",paste0(path_pc_run),"wetness.sgrd "),
+                                 paste0(" -LSFACTOR=",paste0(path_pc_run),"lsfactor.sgrd "),
+                                 paste0(" -VALL_DEPTH=",paste0(path_pc_run),"vall_depth.sgrd")))
 
-# put the beetle locations coordinates into a list  
-allP<-list()
-for (i in seq(1,nrow(uniqueBeetleLocations@coords)) ){
-  allP[[i]]<-   c(uniqueBeetleLocations$lon[i],uniqueBeetleLocations$lat[i])
-}
+# read and stack results
+slope<-raster::raster(paste0(path_pc_run,"/slope.sdat"))
+predictors<-stack(predictors,slope)
+aspect<-raster::raster(paste0(path_pc_run,"/aspect.sdat"))
+predictors<-stack(predictors,aspect)
+convergence<-raster::raster(paste0(path_pc_run,"/convergence.sdat"))
+predictors<-stack(predictors,convergence)
+wetness<-raster::raster(paste0(path_pc_run,"/wetness.sdat"))
+predictors<-stack(predictors,wetness)
+lsf<-raster::raster(paste0(path_pc_run,"/lsfactor.sdat"))
+predictors<-stack(predictors,lsf)
+valld<-raster::raster(paste0(path_pc_run,"/vall_depth.sdat"))
+predictors<-stack(predictors,valld)
 
-### prepare cost raster. basically the input dataset as calculated by r.terraflow
-### is used and will be subsequently scaled to avoid negative valiues
-### it can be a generic DEM, aTopographic Convergence Index (TCI)
-### or a hydrologically filled DEM
-# forks in cost types NOTE all will be accumulated in gcost
-if (costType == "tci"){
-  cat('Topographic Convergence Index (TCI) is used as cost raster\n')
-  offset<- getMinMaxG('tci')[2]
-  rgrass7::execGRASS('r.mapcalc',
-                     flags=c("overwrite"),
-                     expression=paste('"tci_cost = (tci * -1) + ',offset,'"'))
-  costRaster<-"tci_cost"
-} else if (costType == "dem"){
-  cat('original DEM is used as cost raster\n')
-  offset<- getMinMaxG('dem')[2]
-  rgrass7::execGRASS('r.mapcalc',
-                     flags=c("overwrite"),
-                     expression=paste('"dem_cost = (filled * -1) + ',offset,'"'))
-  costRaster<-"dem_cost"
-}else if (costType == "demfilled"){
-  cat('hydrologically corrected DEM is used as cost raster\n')
-  offset<- getMinMaxG('filled')[2]
-  rgrass7::execGRASS('r.mapcalc',
-                     flags=c("overwrite"),
-                     expression=paste('"filled_cost = (filled * -1) + ',offset,'"'))
-  costRaster<-"filled_cost"
-}
-
-# calulate for each point a accumulated cost raster
-
-costDist<-list()
-for (i in seq(1,length(allP))){
-  startP<-allP[i]
-  cat ('calculate accumulated costs for point:',unlist(startP),"\n")
-  rgrass7::execGRASS("r.cost",
-                     flags=c("overwrite","quiet"),
-                     parameters=list(input = costRaster,
-                                     outdir="accudir",
-                                     output="accu",
-                                     start_coordinates = as.numeric(unlist(startP)),
-                                     memory=8000)
-  )
-  
-  
-  cat ('calculate walk cost for point:',unlist(startP),"\n")
-  rgrass7::execGRASS("r.walk",
-                     flags=c("overwrite","quiet"),
-                     elevation="dem",
-                     friction=costRaster,
-                     outdir="walkdir",
-                     output="walk",
-                     start_coordinates=as.numeric(unlist(startP)),
-                     lambda=0.5
-  )
-  
-  
-  # gather costs for all correspondingstP< start locations
-  restP<-(allP[-i])
-  costDist[[i]]<-gcost(path_pc_run,startP,restP)
-}
-    
-
-#mapview::mapview(costDist[[1]])
-cat('Thats it')
-
-print(costDist)
-
-mergedCostDist = Reduce(function(...) merge(..., all=T), costDist)
-
-
+# save stack
+raster::writeRaster(predictors,paste0(path_pc_run,"/predictor_sp.grd"),overwrite=TRUE)

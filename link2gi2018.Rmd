@@ -1,0 +1,255 @@
+---
+title: "link2GI - consistent linking of Open Source GIS with R"
+author: "Chris Reudenbach <br/> Faculty of Geography University of Marburg (Germany)"
+date: 'GEOSTAT August 2018'
+output:
+  xaringan::moon_reader:
+    class: center, middle, inverse
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      ratio: '4:3'
+      highlightLines: true
+      countIncrementalSlides: false
+
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+## About me
+- Geographer, Faculty of Geography at the Marburg University
+  responsible for all kinds of GI stuff
+
+- originally a climatologist and remote sensing scientist of atmosphere shifted interest over to spatial vegetation analysis ecological modeling   with an increasing passion for environmental modeling
+
+- started with Pascal and Fortran between shell and python, and since some time R
+
+- currently I work on a framework for reduction  and standarization of  autonomous retrieval, preprocessing and anaysis of low budget UAV based remote sensing data with focus on forest ecosystems 
+
+--
+
+## Content
+
+1. Aim, prerequisites and data
+1. Some why and what questions
+1. The basic functions
+1. Usecases 
+
+---
+class: center, middle
+
+# Aim, prerequisites and data
+---
+## Aim
+
+- renewing the statement of this week that mature GIS / RS tools can play a major role in the spatial `R` world beside that they are extremely useful 
+
+- providing some basic information for more simple access to `GRASS SAGA` and `OTB` software
+
+- giving some hands on case studies 
+
+### Find slides and materials
+https://gisma.github.io/link2gi2018/link2gi2018.html
+https://github.com/gisma/link2gi2018
+
+---
+## Prerequisites
+Briding to something means that you need at least two pillars and the bridge roadway itself. So please check:
+
+### The R pillar 
+
+R needs the following packages (and their dependecies of course): 
+```{r, eval=FALSE}
+install.packages(c("link2GI","sf", "raster",  "rgdal", "gdalUtils", "tools", "rgrass7", "sp", "RSAGA"))
+```
+--
+### The GIS pillar
+
+You need at least one Installation of the following GIS software.
+
+- For `GRASS`- and `SAGA-GIS` follow the [RQGIS installation instructions](https://github.com/jannes-m/RQGIS/blob/master/vignettes/install_guide.Rmd) as provided by Jannes Muenchow. For standalone GRASS you may have a look at the the [geostat2018 instructions](https://gitlab.com/veroandreo/grass-gis-geostat-2018) as provided by Veronica Andreos.
+- For installing the `Orfeo Toolbox`, please follow these [installations instructions](https://www.orfeo-toolbox.org/CookBook/Installation.html).
+---
+### The data 
+
+Bridging from `R` to GIS means download the data and scripts for the exercises. This will take quite a while so better start now.
+
+Executing the code you will create the folder *link2gi-master* in your home folder. During the tutorial it is assumed to be the root folder.
+
+You may do it manually but please don't forget to adapt the path strings in the tutorial scripts.
+
+```{r, eval=FALSE}
+url <- "https://github.com/gisma/link2gi2018/archive/master.zip"
+res <- curl::curl_download(url, paste0(tmpDir(),"master.zip"))
+utils::unzip(zipfile = res, exdir = "~")
+```
+
+---
+class: center, middle
+
+# Some why and what questions
+
+---
+## Why using external software at all?
+
+--
+
+1. if you perform spatial analysis on heterogeneous and large data, it is simply a feature of good scientific practice to screen and take into account what already exists
+
+--
+
+2. it could be worth the effort thinking about using reliable, quality-controlled and optimized software tools
+
+--
+
+3. from my personal perspective, the main point of external software is that you can focus on the scientific and content-related issues instead of reinventing the wheel
+
+--
+
+
+##  Why just another wrapper package?
+
+The R community has some well known wrapper packages dealing with this topic as `rgdal`, `rgrass7`, `RSAGA`, `RQGIS` and so on...
+
+### because despite the good packages simply some things do not work or are cumbersome
+
+---
+
+# What is cumbersome?
+
+### Current situation 
+
+`R` is a low entry-level scripting language for geo-spatial tasks **and**
+ there is an increasing demand for (complex) spatio-temporal data analysis. 
+
+This leads to a significant increase in popularity among users.
+--
+
+### In daily use, the most common problems are:
+
+
+  - focus on well known software (R) **and** operating system (whatever)  
+
+--
+
+  - a comparatively complex software ecotope 
+
+--
+  
+  - restricted user privileges 
+
+--
+  - every day workarounds means interactive / manual usage of external GIS software prevents effective workflows
+  
+--
+
+  - cumbesome experience with cross platform cross software expirience (not only starting with collaborative writing articles with Word)
+  
+  easily to be continued...
+
+---
+##  What would be desirable?
+
+- from a typical R-User point of view without either sufficient privileges or not familiar with GIS-software or the operating system it seems to be at least **helpful** to reduce some of this issues
+
+- from a teaching point of view it would be great to avoid the nightmare to adapt individual laptop configurations or lab restrictions.
+
+- from a R-developer point of view it is helpful to enable the integration of fast and relieble algorithms of mature software systems
+
+--
+
+### This is what link2GI tries to do
+
+- The [link2GI](https://CRAN.R-project.org/package=link2GI) package is a small tool for linking GRASS, SAGA GIS and Orfeo Toolbox (OTB) more consistent and with one line code to the R environment.
+
+- It is focussing on both R users that are not operating system specialists or highly experienced GIS users as well as on fast prototying using of mature GIS algorithms 
+---
+class: center, middle
+# The basic features and functions
+---
+## Features of link2GI so far
+
+--
+
+- detects all/most existing intallations of `GRASS7, SAGA`, and `Orfeo Toolbox` (` GRASS 7.x +, SAGA 2.x +, OTB` - all releases)
+
+--
+
+- provides working temporary/permanent user envionments as required by the corresponding GIS software for command line and  wrapper packages (`RSAGA`, `rgrass7`)
+
+--
+
+- simplifies `OTB` calls via a first list-based `OTB` wrapper 
+
+---
+## Get an overview 
+
+```R
+# load library
+require(link2GI)
+
+# find all GRASS GIS installations at the default search location
+grass <- link2GI::findGRASS()
+print(grass)
+
+# find all SAGA installations at the default search location
+saga <- link2GI::findSAGA()
+print(saga)
+
+# find all Orfeo Toolbox installations at the default search location
+otb <- link2GI::findOTB()
+print(otb)
+```
+
+
+--- 
+---
+## Let's use meuse with GRASS
+
+```R
+# get meuse data as sp object
+require(link2GI)
+require(sp)
+require(sf)
+# get meuse data as sf object
+data(meuse) 
+meuse_sf = st_as_sf(meuse, 
+                    coords = 
+                      c("x", "y"), 
+                    crs = 28992, 
+                    agr = "constant")
+
+# create a temporary GRASS linkage using the meuse data
+
+linkGRASS7(meuse_sf,select_ver=1)
+```
+--
+### Hands on
+- Use the [vignette](https://github.com/gisma/link2gi2018/blob/master/R/vignette/link2gigeostat.Rmd) for more basic examples
+- Dive into the usecases for getting an idea how to use link2GI
+---
+class: center, middle
+# Usecases 
+---
+# Usecases
+
+- [SAGA & OTB basic usecase](https://github.com/gisma/link2gi2018/blob/master/R/usecases/saga-otb/useCaseSAGA-OTB.R)
+
+- [Analysing the ECA&D climatic data - reloaded](https://github.com/gisma/link2gi2018/blob/master/R/usecases/grass/useCaseGRASS-Neteler2018.R)
+
+- [beetle spread over high asia](https://github.com/gisma/link2gi2018/blob/master/R/usecases/cost-analysis/useCaseBeetle.R)
+
+- [Canopy Height Model from UAV derived point clouds](https://github.com/gisma/link2gi2018/blob/master/R/usecases/uav-pc/usecaseCHM.R)
+
+---
+class: center, middle
+ 
+# Thank you for attention
+  
+  c.reudenbach@uni-marburg.de
+  
+---
+  
+
