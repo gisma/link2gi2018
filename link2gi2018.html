@@ -66,6 +66,10 @@ R needs the following packages (and their dependecies of course):
 
 ```r
 install.packages(c("link2GI","sf", "raster",  "rgdal", "gdalUtils", "tools", "rgrass7", "sp", "RSAGA"))
+# because of a pending CRAN update please install link2GI from github
+devtools::install_github("gisma/link2GI", ref = "master")
+# for the Canopy height model usecase you need to install uavRst
+devtools::install_github("gisma/uavRst", ref = "master")
 ```
 --
 ### The GIS pillar
