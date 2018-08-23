@@ -1,0 +1,12 @@
+proj:       3
+zone:       0
+north:      75:30N
+south:      25:15N
+east:       75:30E
+west:       40:30W
+cols:       464
+rows:       201
+e-w resol:  0:15
+n-s resol:  0:15
+format:     -1
+compressed: 2

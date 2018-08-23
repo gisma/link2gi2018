@@ -1,0 +1,8 @@
+COMMAND: v.in.ogr input="/vsizip/vsicurl/https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/cultural/ne_10m_admin_1_states_provinces.zip" output="ne_10m_admin_1_states_provinces" min_area=0.0001 type="" snap=-1
+GISDBASE: /home/mneteler/grassdata
+LOCATION: ecad17_ll MAPSET: PERMANENT USER: mneteler DATE: Mon Aug 13 23:45:09 2018
+-----------------------------------------------------
+8526 input polygons
+Total area: 1.47221E+14 (8528 areas)
+Overlapping area: 0 (0 areas)
+Area without category: 3.96311E+11 (2 areas)

@@ -1,0 +1,8 @@
+COMMAND: v.in.ogr --overwrite input="/home/creu/link2gi2018-master/grassreload/geodata/ne_10m_admin_0_countries.shp" output="country_boundaries" min_area=0.0001 type="" snap=-1
+GISDBASE: /home/creu/link2gi2018-master/grassreload/grassdata/
+LOCATION: ecad17_ll MAPSET: ecad17 USER: creu DATE: Thu Aug 23 11:47:55 2018
+-----------------------------------------------------
+4253 Eingabepolygone
+Gesamtfläche: 1.47223E+14 (4254 Flächen)
+Überlappende Fläche: 0 (0 Flächen)
+Fläche ohne Kategorie: 3.9631E+11 (1 Flächen)

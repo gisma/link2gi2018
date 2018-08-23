@@ -1,0 +1,12 @@
+Source: ECA&D V17, 2018
+
+https://www.ecad.eu/download/ensembles/download.php#datafiles
+
+Citation and acknowledgement
+	
+E-OBS temperature and precipitation:
+We acknowledge the E-OBS dataset from the EU-FP6 project ENSEMBLES (http://ensembles-eu.metoffice.com) and the data providers in the ECA&D project (http://www.ecad.eu)
+
+Citation:
+Haylock, M.R., N. Hofstra, A.M.G. Klein Tank, E.J. Klok, P.D. Jones and M. New. 2008: A European daily high-resolution gridded dataset of surface temperature and precipitation. J. Geophys. Res (Atmospheres), 113, D20119, doi:10.1029/2008JD10201
+
