@@ -245,7 +245,7 @@ class: center, middle
 
 - [beetle spread over high asia](https://github.com/gisma/link2gi2018/blob/master/R/usecases/cost-analysis/useCaseBeetle.R)
 
-- [Canopy Height Model from UAV derived point clouds](https://github.com/gisma/link2gi2018/blob/master/R/useCases/uav-pc/usecaseCHM.R)
+- [Canopy Height Model from UAV derived point clouds](https://github.com/gisma/link2gi2018/blob/master/R/useCases/uav-pc/useCaseCHM.R)
 
 ---
 class: center, middle
