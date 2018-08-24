@@ -68,7 +68,7 @@ devtools::install_github("gisma/link2GI", ref = "master")
 # for the Canopy height model usecase you need to install uavRst
 devtools::install_github("gisma/uavRst", ref = "master")
 ```
---
+---
 ### The GIS pillar
 
 You need at least one Installation of the following GIS software.
