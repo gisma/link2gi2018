@@ -30,8 +30,8 @@
 # tutorial data is produced using [Agisoft Photoscan](http://www.agisoft.com)
 # which is a great tool for deriving point clouds and all kind of surface
 # models. In the end of the processing chain you will have an orthorectified
-# image and a dense point cloud. We will use some UAV data from the Marburg Open
-# Forest project https://www.sensing-biodiversity.org/.
+# image and a dense point cloud. We will use some UAV data from the 
+# [Marburg Open Forest](https://www.sensing-biodiversity.org) project.
 
 devtools::install_github("gisma/link2GI", ref = "master")
 devtools::install_github("gisma/uavRst", ref = "master")
