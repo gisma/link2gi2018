@@ -15,7 +15,6 @@ class: center, middle, inverse, title-slide
 ### Chris Reudenbach <br/> Faculty of Geography University of Marburg (Germany)
 ### GEOSTAT August 2018
 
-      
 ---
 
 
@@ -66,7 +65,7 @@ Briding to something means that you need at least two pillars and the bridge roa
 R needs the following packages (and their dependecies of course): 
 
 ```r
-install.packages(c("link2GI","sf", "raster",  "rgdal", "gdalUtils", "tools", "rgrass7", "sp", "RSAGA"))
+install.packages(c("sf", "raster",  "rgdal", "gdalUtils", "tools", "rgrass7", "sp", "RSAGA"))
 # because of a pending CRAN update please install link2GI from github
 devtools::install_github("gisma/link2GI", ref = "master")
 # for the Canopy height model usecase you need to install uavRst
