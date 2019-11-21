@@ -107,81 +107,30 @@ RSAGA::rsaga.geoprocessor(lib = "ta_morphometry", module = 28,
 
 mapview::mapview(raster::raster(paste(path_SO_run,"MTPI.sdat", sep = "")))  
 
+
 ### basic OTB example tackling it down by knowing the command line parameters
 ### we choose LocalStatisticExtraction 
 # https://www.orfeo-toolbox.org/CookBook/Applications/app_LocalStatisticExtraction.html
-### mention we use the otb variable for determing the pathes
 
-## define module name (executable)
-command<-paste0(otb$pathOTB,"otbcli_LocalStatisticExtraction")
-## define concatenate the input filname
-command<-paste(command, " -in ", demFileName )
-## define concatenate the channel (band)
-command<-paste(command, " -channel ", 1)
-## define concatenate the output filname
-command<-paste(command, " -out ", paste0(path_SO_run,"otb_stat.tif"))
-## define kernel radius
-command<-paste(command, " -radius ",15)
 
-## make the API call
-system(command,intern = TRUE,ignore.stdout = TRUE,show.output.on.console = TRUE) 
+## for the example we use the edge detection, 
+algoKeyword<- "LocalStatisticExtraction"
 
-mapview::mapview(raster::raster(paste0(path_SO_run,"otb_stat.tif")))
+## extract the command list for the choosen algorithm 
+cmd<-parseOTBFunction(algo = algoKeyword, gili = otblink)
 
-## if you do not want read and copy and paste the documentation 
-## you may use a very simple parser
 
-## parse all modules 
-algo<-parseOTBAlgorithms(gili = otb)
+## define the mandantory arguments all other will be default
+cmd$input  <- demFileName
+cmd$out <- file.path(path_SO_run,"otb_stat.tif")
+cmd$radius <- 5
 
-## take edge detection
-otb_algorithm<-algo[27]
-algo_cmd<-parseOTBFunction(algo = otb_algorithm,gili = otb)
 
-## print the current command
-print(paste(names(algo_cmd),algo_cmd,collapse = " "))
+## run algorithm
+retStack<-runOTB(cmd,gili = otblink,quiet = FALSE)
 
-### full usecase 
-## (again) link to OTB
-otblink<-link2GI::linkOTB()
-path_OTB<-otblink$pathOTB
-
-## get data
-setwd(tempdir())
-## get some typical data as provided by the Bavarian authority
-url<-"http://www.ldbv.bayern.de/file/zip/5619/DOP%2040_CIR.zip"
-res <- curl::curl_download(url, "testdata.zip")
-unzip(res,junkpaths = TRUE,overwrite = TRUE)
-
-## get all modules
-algo<-parseOTBAlgorithms(gili = otblink)
-
-## use edge detection 
-algo_cmd<-parseOTBFunction(algo = algo[27],gili = otblink)
-
-## set arguments
-algo_cmd$`-progress`<-1
-algo_cmd$`-in`<- file.path(getwd(),"4490600_5321400.tif")
-algo_cmd$`-filter`<- "sobel"
-
-## create out name
-outName<-paste0(getwd(),"/out",algo_cmd$`-filter`,".tif")
-algo_cmd$`-out`<- outName
-
-# if the filter key word is touzi we need anisotropic radius parameters
-if (filter == "touzi") {
-  algo_cmd$`-filter.touzi.xradius`<- filter.touzi.xradius
-  algo_cmd$`-filter.touzi.yradius`<- filter.touzi.yradius
-}
-
-## generate basic command 
-command<-paste0(path_OTB,"otbcli_",otb_algorithm," ")
-
-## generate full command
-command<-paste(command,paste(names(algo_cmd),algo_cmd,collapse = " "))
-
-## make the system call
-system(command,intern = TRUE)
+## plot raster
+mapview::mapview(retStack)
 
 
 ## plot raster
