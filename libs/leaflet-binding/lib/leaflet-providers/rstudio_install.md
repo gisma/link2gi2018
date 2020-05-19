@@ -14,6 +14,7 @@ JSON.stringify(providers, null, "  ");
 ```
   * `./data-raw/providerNames.R` was re-ran to update to the latest providers
 
+
 * Some providers had their protocols turned into '//'.
   * This allows browsers to pick the protocol
   * To stop files from the protocols staying as files, a ducktape patch was applied to `L.TileLayer.prototype.initialize` and `L.TileLayer.WMS.prototype.initialize`
